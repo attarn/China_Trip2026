@@ -1,24 +1,1518 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.5">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; color: #3d3d3d; -webkit-text-stroke: #000000; background-color: #e5e5e5}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; color: #3d3d3d; -webkit-text-stroke: #000000; background-color: #e5e5e5; min-height: 14.0px}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 12.0px Helvetica; color: #3d3d3d; -webkit-text-stroke: #000000; background-color: #e5e5e5}
-    span.s1 {font-kerning: none}
-    span.Apple-tab-span {white-space:pre}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Reference Sheet</title>
+
+  <!-- THREE PROFESSIONAL FONTS from Google Fonts -->
+  <!-- Font 1: Playfair Display — elegant serif, great for headings/titles -->
+  <!-- Font 2: Inter — clean sans-serif, great for body text and UI -->
+  <!-- Font 3: Lora — literary serif, great for pull quotes and long-form reading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #2a2a2a;
+      background: #f9f8f5;
+      padding: 60px 20px;
+    }
+
+    /* ============================================================
+       PAGE LAYOUT — centered container
+    ============================================================ */
+    .page {
+      width: 80%;
+      max-width: 900px;
+      margin: 0 auto;              /* ← THIS centers the whole page horizontally */
+      background: #ffffff;
+      padding: 60px 64px;
+      border-radius: 8px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* ============================================================
+       SECTION DIVIDERS (for this reference sheet only)
+    ============================================================ */
+    .section {
+      border-top: 2px solid #e8e4de;
+      margin-top: 48px;
+      padding-top: 40px;
+    }
+    .section:first-child { border-top: none; margin-top: 0; padding-top: 0; }
+
+    .label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 20px;
+    }
+
+    /* ============================================================
+       FONT 1 — PLAYFAIR DISPLAY (serif display/heading font)
+    ============================================================ */
+    .font-playfair { font-family: 'Playfair Display', Georgia, serif; }
+
+    /* ============================================================
+       FONT 2 — INTER (clean sans-serif body/UI font)
+    ============================================================ */
+    .font-inter { font-family: 'Inter', 'Helvetica Neue', sans-serif; }
+
+    /* ============================================================
+       FONT 3 — LORA (literary serif for long-form / pull quotes)
+    ============================================================ */
+    .font-lora { font-family: 'Lora', Georgia, serif; }
+
+    /* ============================================================
+       FONT SIZES
+    ============================================================ */
+    .size-xs    { font-size: 12px; }   /* tiny labels, captions */
+    .size-sm    { font-size: 14px; }   /* nav, buttons, metadata */
+    .size-base  { font-size: 16px; }   /* body text — use this most */
+    .size-lg    { font-size: 20px; }   /* subheadings */
+    .size-xl    { font-size: 28px; }   /* section titles */
+    .size-2xl   { font-size: 40px; }   /* page titles */
+    .size-hero  { font-size: 64px; line-height: 1.1; } /* hero / splash */
+
+    /* ============================================================
+       TEXT STYLES
+    ============================================================ */
+    .bold        { font-weight: 700; }
+    .semibold    { font-weight: 600; }
+    .light       { font-weight: 300; }
+    .italic      { font-style: italic; }
+    .bold-italic { font-weight: 700; font-style: italic; }
+    .underline   { text-decoration: underline; }
+    .strikethrough { text-decoration: line-through; }
+    .uppercase   { text-transform: uppercase; letter-spacing: 0.08em; }
+    .muted       { color: #888; }
+    .accent      { color: #01696f; }   /* swap this hex for any brand color */
+
+    /* ============================================================
+       ALIGNMENT
+    ============================================================ */
+    .align-left   { text-align: left; }    /* default */
+    .align-center { text-align: center; }
+    .align-right  { text-align: right; }
+
+    /* ============================================================
+       PARAGRAPH SPACING & INDENTS
+    ============================================================ */
+    /* Method 1: margin between paragraphs (most common) */
+    .para-spaced p + p {
+      margin-top: 20px;
+    }
+
+    /* Method 2: first-line indent (book/print style) */
+    .para-indented p + p {
+      text-indent: 2em;
+    }
+
+    /* Method 3: block indent (nested content, quotes) */
+    .block-indent {
+      padding-left: 32px;
+      border-left: 3px solid #ddd;
+      margin: 20px 0;
+    }
+
+    /* ============================================================
+       HEADINGS — uses Playfair Display
+    ============================================================ */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', Georgia, serif;
+      line-height: 1.2;
+      color: #1a1a1a;
+    }
+    h1 { font-size: 48px; margin-bottom: 16px; }
+    h2 { font-size: 32px; margin-bottom: 14px; }
+    h3 { font-size: 24px; margin-bottom: 12px; }
+    h4 { font-size: 20px; margin-bottom: 10px; font-style: italic; }
+    h5 { font-size: 16px; margin-bottom: 8px; font-weight: 600; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; }
+    h6 { font-size: 14px; margin-bottom: 6px; font-family: 'Inter', sans-serif; color: #888; }
+
+    /* ============================================================
+       LINKS
+    ============================================================ */
+    a {
+      color: #01696f;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    a:hover { color: #0c4e54; }
+
+    /* ============================================================
+       LISTS
+    ============================================================ */
+    ul, ol {
+      padding-left: 24px;
+      margin: 16px 0;
+    }
+    li { margin-bottom: 8px; }
+    ul.no-bullets { list-style: none; padding-left: 0; }
+
+    /* ============================================================
+       BLOCKQUOTE / PULL QUOTE
+    ============================================================ */
+    blockquote {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 20px;
+      font-style: italic;
+      color: #555;
+      border-left: 4px solid #01696f;
+      padding: 12px 24px;
+      margin: 24px 0;
+    }
+    blockquote cite {
+      display: block;
+      font-size: 13px;
+      font-style: normal;
+      font-family: 'Inter', sans-serif;
+      color: #999;
+      margin-top: 8px;
+    }
+
+    /* ============================================================
+       HORIZONTAL RULE
+    ============================================================ */
+    hr {
+      border: none;
+      border-top: 1px solid #e0dbd4;
+      margin: 32px 0;
+    }
+
+    /* ============================================================
+       IMAGES
+    ============================================================ */
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      display: block;
+    }
+    .img-caption {
+      font-size: 13px;
+      color: #999;
+      margin-top: 8px;
+      margin-bottom: 28px; 
+      font-style: italic;
+      font-family: 'Lora', Georgia, serif;
+    }
+    .img-full    { width: 100%; }
+    .img-half    { width: 50%; }
+    .img-center  { margin: 0 auto; }       /* center an image */
+    .img-right   { float: right; margin-left: 20px; margin-bottom: 8px; }
+    .img-left    { float: left;  margin-right: 20px; margin-bottom: 8px; }
+    .clearfix::after { content: ""; display: table; clear: both; }
+
+    /* ============================================================
+       VIDEO EMBED (YouTube / Vimeo iframe)
+    ============================================================ */
+    .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      margin: 24px 0;
+    }
+    .video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    /* ============================================================
+       CODE / MONOSPACE
+    ============================================================ */
+    sup {
+      font-size: 0.65em;
+      vertical-align: super;
+      font-weight: 600;
+    }   
+    
+    code {
+      font-family: 'Courier New', monospace;
+      background: #f0ede8;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 20px 24px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 16px 0;
+    }
+
+    /* ============================================================
+       TABLE
+    ============================================================ */
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
+    th {
+      background: #f3f0eb;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 2px solid #ddd;
+    }
+    td { padding: 10px 14px; border-bottom: 1px solid #eee; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #faf9f7; }
+
+    /* ============================================================
+       UTILITY CLASSES (handy for your travel journal)
+    ============================================================ */
+    .spacer-sm  { height: 16px; }
+    .spacer-md  { height: 32px; }
+    .spacer-lg  { height: 64px; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin: 20px 0;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .callout {
+      background: #f0f8f7;
+      border-left: 4px solid #01696f;
+      padding: 16px 20px;
+      border-radius: 0 6px 6px 0;
+      font-size: 15px;
+      margin: 20px 0;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 600px) {
+      .page { padding: 32px 24px; }
+      .two-col, .three-col { grid-template-columns: 1fr; }
+      .size-hero { font-size: 40px; }
+      h1 { font-size: 32px; }
+    }
   </style>
 </head>
+
+
+
+
+
+
 <body>
-<p class="p1"><span class="s1">&lt;span&gt;</span></p>
-<p class="p1"><span class="s1">&lt;bold&gt;Text&lt;bold&gt;</span></p>
+<div class="page">
+<body>
+
+  <div class="section">
+    <p class="font-playfair size-hero">What It's Like In China</p>
+    <p class="font-playfair size-xl">Shanghai, Xi'an, Chongqing</p>
+    <p class="font-inter size-sm muted" style="margin-top:8px;">May 20 - June 4</p>
+    <p class="font-inter size-base" style="margin-top:8px;">This is a write-up of my trip through China. The goal of my trip was to get a sense of what China is like and the below is the understanding I came away with. It is everything I found unique, surprising, and noteworthy. All the pictures and videos were taken by me.</p>
+    <p class="font-inter size-base" style="margin-top:8px;">I spent a lot of time while there thinking about how to explain to an audience what China is actually like and how to compare Chinese cities to those in America. The best direct American analog I could come up with would be Washington DC with the culture of New Orleans, but I want to state up top that you can't dirctly compare the cities and that <b>America does not <i>currently</i> have any Tier 1 cities</b>. I'm hoping that everything I've written below can collectively convey a sense of why that is the case.</p>
+  </div>
+
+
+  <!-- 
+  ============================================================
+       The Apps
+  ============================================================ 
+  -->
+  
+  <div class="section">
+    <p class="font-playfair size-xl">The Apps and The Internet</p>
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">The Internet</h5>
+    <p class="img-caption">The Apps I Needed While In China</p>
+    
+    <div class="para-spaced">
+      <p>Some context: I have a dual sim iPhone with an American and a Hong Kong phone plan. While in Hong Kong my American Roaming is turned off so I can receive texts and calls and iMessages, but I can’t send them without Roaming flipping on and getting charged $12/day. My Hong Kong plan is through Birdie and uses an eSim. For $2/day they’ll extend my Hong Kong coverage outside of Hong Kong, including to the mainland. So while I was in China using my mobile data, I was able to access anything on the internet that I normally would be able to from Hong Kong. The internet in Hong Kong is nearly identical to the internet in America with the exception of some local American news websites being geo-blocked along  with Chatgpt and Tiktok. </p>
+      <p>When I wanted to use the Chinese internet, I could turn on my Wi-Fi and connect to hotel, mall, or restaurant Wi-Fi.  Surprisingly, you can access some of the western internet. I used Baidu (Chinese Google) to search for Ukraine War updates and for the Fifa schedule. There were a handful of years old articles about Ukraine from a mix of mostly Chinese and European news organizations I hadn’t heard of and at least one old article from I think Reuters. For Fifa, I was able to get onto and navigate ESPN.com. That said, the English language results from Baidu searches seemed unreliable and everything I ever needed internet for was available in the handful of apps I downloaded and will speak to in the next section. </p>
+      
+    </div>
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">The Apps</h5>  
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPP643na_TPPN0PSyPebkub3M5JhfYnt7yFUMm9f1YhuL13hTh7zdyn7hk3D77aPfwT-ooLVdTIKTEAzrsK-WeS4MLs3gRMgDhnCdqd62yx0kKGny3wW-aFm-DYHnsAOJ-0O5ATBA9zTZfvJoqDPYxd=w928-h1160-s-no-gm?authuser=0" alt="Important Chinese Apps" class="img-full" width="760" height="400" loading="lazy">
+     <div class="para-spaced">
+      <p style="margin-top:12px;">The two most important apps are Alipay and WeChat. AlipayHK is the Hong Kong version of Alipay and more easily connected to Hong Kong banking so I’m glad I had all three. The apps do basically the same thing and are a messaging app, banking app, travel app, and social media rolled into one. I booked my train and attractions tickets, researched what to do in each city, paid for everything and communicated with the hotels through the apps. You can use credit cards directly in some places, but you can also link your credit card to you WeChat and use either that or Alipay anywhere. I never saw anyone use cash anywhere. I imagine this gives China incredible insight into every transaction that happens in the country and makes fraud incredibly difficult and taxes incredibly easy. </p>
+      <p>In order to use the apps, you need to go through Real Name Verification. You need to input your name, address, and passport information, record your face from different angles including blinking and with your mouth open, and provide your banking and credit card information to use the payment services. It felt invasive, but I’m not sure it’s any more invasive than what is required from American companies, but those requests are more distributed instead of all at once. After you’ve been verified, everything works really smoothly because it’s all tied together. There’s no way to dine and dash at a restaurant because you order through Alipay or WeChat and the restaurant knows who you are. Apparently, there are very few spam calls as callers have to be real verified people. When you buy tickets to a museum or for a train, the ticket is tied directly to your identify. You just scan your Chinese ID card or foreign passport when you get there, no ticket required. </p>
+      <p>One key feature of Alipay and WeChat is the scan tool. It’s mostly used for scanning POS QR codes or other people’s personal QR codes to buy things and to pay people directly. For stores it works like tapping a credit card and for individuals it’s like Venmo or FPS where you type in a dollar amount and the money goes to their phone number. The other use is to load mini-apps into Alipay or WeChat. Restaurants have their own unique apps that display their menus, allow you to order, join as a member, and pay your bill. The same is true for renting phone chargers or ebikes, buying tickets, or a million other things that you can’t access directly through Alipay or WeChat. Any small infrequently used “website” would be a mini-app that gets loaded directly into Alipay or WeChat. </p>
+      <p>Other standalone apps that I used through the trip were Amap and Baidu Maps, Baidu Translate, Trip.com, Xiaohongshu/Rednote, and Dianping. I write more on the maps in the “The Maps” section. I mostly used my Hong Kong data and Google Translate, but Baidu Translate was useful to have when on wifi. Trip.com is the main travel app and is helpful for finding and booking hotels. Xiaohongshu is Chinese Tiktok and Dianping is useful for finding malls, restaurants, hotels, bars, and taxis. </p>
+      <p>Other apps do exist and, from what I saw, people have dozens of them on their phones. These are larger, more data heavy apps like maps, Baidu Search and Translate, games, video streaming, Xiaohongshu (Chinese Tiktok), and shopping apps. </p>      
+     </div>
+ 
+  <!-- 
+  ============================================================
+       The Maps
+  ============================================================ 
+  -->
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">The Maps</h5>
+
+
+
+
+
+
+  
+  <!-- 
+  ============================================================
+       HSR
+  ============================================================ 
+  -->
+
+  <div class="section">
+    <p class="font-playfair size-xl">The Trains</p>
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPSEpX-cJwct7Bz0XQIoJY0Xp3-ToJ8_rQ1-aTqT_Zx12VIaDFJLbqh79azAKghzH2wVcbybFdQOQ-uIcB_DEXqQ1PmJshpDOgSgaJglfd76cz6nr4Do4IyEdbLfHJQH62o3Z2V-07IdkCjzgA0lPMH=w1654-h930-s-no-gm?authuser=0" alt="A street scene" class="img-full" width="760" height="400" loading="lazy">
+    <p class="img-caption">The train from Shanghai to Xi'an</p>
+    
+    <div class="para-spaced">
+      <p>I took four trips on China's High Speed Rail:</p>
+    </div>
+    
+    <table>
+      <tbody>
+        <tr>
+          <td>Hong Kong → Shanghai</td>
+          <td>8h 8m</td>
+          <td>2<sup>nd</sup> Class</td>
+          <td>$139</td>
+        </tr>
+        <tr>
+          <td>Shanghai → Xi'an</td>
+          <td>7h 24m</td>
+          <td>1<sup>st</sup> Class</td>
+          <td>$175</td>
+        </tr>
+        <tr>
+          <td>Xi'an → Chongqing</td>
+          <td>5hr 15m</td>
+          <td>1<sup>st</sup> Class</td>
+          <td>$112</td>
+        </tr>
+        <tr>
+          <td>Chongqing → Hong Kong</td>
+          <td>7h 13m</td>
+          <td>1<sup>st</sup> Class</td>
+          <td>$176</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="para-spaced">
+      <p>Flying from Hong Kong to Shanghai and from Xi'an to Chongqing is significantly cheaper than the train. Flying from Shanghai to Xi'an and from Chongqing to Hong Kong is slightly more expensive. Flying is also significantly faster with the trip from Hong Kong to Shanghai taking roughly 2h 30m. I chose to take the train because I wanted to see more of China and experience the High Speed Rail, something that America has talked about for decades, but has never been able to accomplish. </p>
+      <p>It was overall a really good experience. The train traveled at 300kph (186mph) for most of the journey.</p>
+    </div>    
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">The Stations</h5>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczNL-3x7VBJSd5NAWBUy439lwVNsf-lZIn3AL3OClCLG-wrvy9iDZVHNIKMc_Gh9wyTOE8lTdpBJBQXRZgT2iA4SIdpk6gxN_T-QGyUFvdOaIyMiDHP3qFqNG6aa-O_C-1ehrlBv631q9Ifoc0yo4DnV=w2094-h1570-s-no-gm?authuser=0" alt="Food" class="img-full" width="360" height="40" loading="lazy">
+        <p class="img-caption">Hong Kong Station</p>
+      </div>
+    <div class="para-spaced">
+      <p>Hong Kong Station’s beautiful ceiling architecture is the only differentiating feature of the High Speed Rail stations. They are all enormous, brand new, sparkling clean, efficiently planned out spaces. You walk through the station doors and immediately have dozens of automated gates where locals can scan their ID cards. There is a desk at the end that has a person manually checking IDs for people with passports. It takes less than a minute to get through and reach the bag scanners and metal detectors. Making it through security is a breeze (more on that in The Security). Behind security is the station. There’s plenty of seating (with electrical outlets) next to each gate and a handful of touristy stores and vending machines on the first floor, and about a dozen fast food restaurants with additional seating on the second floor that wrap around the edge of the building, allowing you to always have a view of your gate. All of the signage is in Chinese and English. 15 minutes before departure, you’re allowed to scan your ID or passport and go down to the platform.</p>  
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczNFH9nZtITsWkHuPSxw_YqDus1uOqCMMjChHyDbXjBSzjyn43lmh7onPeqI1io1HxmI5CpaYzQTO2Ghh9pwdwaWZddQE0BiCZzNH0gYuB1FGX2I9sSOgCJvscOF5Hx1_MMt9TG4HrL7CeuWEWzIarUS=w2094-h1570-s-no-gm?authuser=0" alt="Market" class="img-full" width="360" height="240" loading="lazy" style="margin-top: 24px;">
+          <p class="img-caption">Shanghai Station</p>
+        </div>
+      <p>Other than the security (discussed later), it doesn’t feel all that different from visiting an Amtrak station. They’re very impressive visually. Immediately after security, you go up an escalator or around a corner and are hit with the view of the entire station laid out in front of you. The Chongqing station had a giant LED board in the middle of the station that would play ads and very occasionally swivel randomly almost as if it was sentient and looking around. The stations were easy to navigate, had plenty of seating, and everyone lined up neatly when it was time to go through the gates. </p> 
+      <p>My only interaction with anyone was when a guy in the Shanghai station asked where I was from and if I had any colleagues who were looking for manufacturing connection in China.  </p> 
+       
+       <div class="video-wrap">
+          <iframe
+            src="https://youtu.be/IQ1fIrEyG0k"
+            title="Travel video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <p class="img-caption">Arriving in Shanghai</p>
+      </div>
+      
+      <p>The trains arrive silently and are surprisingly clean for how many bugs I’m sure must hit the front of them. Your ticket has your car and seat number and you get on without anyone checking your ticket. There’s a light above each seat to show which have been purchased, but as far as I can tell, you’re allowed to sit anywhere you want once the train starts moving.</p>    
+    
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">The Cabin</h5>
+    <div class="two-col">
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczPD2UJuCTxEjoybfQec9-ttuZbubzWnE-v96xgxt_n01EC9_f4xclEx2nMHODCyp_bnxp-c9OVaQN97OvusCuN3P3qxB3I838X6xTxX-sHwSEo4QCxq2NdSVgQwKKt9-mvKlHBrjXfu2uZGrHs0cGi_=w1090-h1454-s-no-gm?authuser=0" alt="Food" class="img-full" width="360" height="40" loading="lazy">
+        <p class="img-caption">2<sup>nd</sup> Class</p>
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczNxPB3Bv4gEJ6u2WPbYtRiG_-xoycPc2HL5gi9SL9xp-sPocKT_pPD2EYbpdq1O4WQayULLCFB5BVWYr4G0pq2J-HriFl2ZXuvpjY7qtuYP7C5urDqEQrxP942MSx0_JtfsdtK7gcU6PMDin_pTb8Nw=w1090-h1454-s-no-gm?authuser=0" alt="Market" class="img-full" width="360" height="240" loading="lazy">
+        <p class="img-caption">1<sup>st</sup> Class</p>
+      </div>
+    </div>
+    <div class="para-spaced">
+      <p>There are four classes on most High Speed Rail Trains, standing, 2<sup>nd</sup>, 1<sup>st</sup>, and Business Class. Standing costs the same as 2<sup>nd</sup> Class and I think is meant for short trips when trains are full. On June 11th at 10:15 am from Shanghai to Xi’an 2<sup>nd</sup> Class is $102, 1<sup>st</sup> is $163, and Business is $322. Given that the trains are slower and barely competitive with airline tickets, I think the High Speed Rail is mainly intended for shorter trips and to travel to intermediate cities without many flights, although I did notice many of the people around me stayed on for most of each trip.</p>
+      <p>My 2<sup>nd</sup> Class seat from Hong Kong to Shanghai was plenty comfortable and each seat came with a fold out table and a power outlet. There was plenty of leg room and room for luggage both above the seats and in baggage areas at the front of the car. There were lots of people eating and the occasional person playing videos aloud from their phone so I was glad I brought my noise cancelling headphones.</p>
+      <p>1<sup>st</sup> Class seats were much more comfortable and the car was quieter. The seats recline significantly and there’s a lot of leg room. Not every train had a business class car and it was too expensive for me to investigate, but the seats look egg-like, similar to first class seats on an international flight. Those are 3 to a row with a line of singles on the left, the aisle, and a pair of seats on the right. </p>
+      <p>You’re allowed to walk around whenever you want. The cars have both a western and squatting toilet and a hot water dispenser for drinks and ramen. The app tells you how long you’ll be at a station (usually 5 minutes or so) and at each a handful of people will get off for a cigarette. All of the cabins are non-smoking.</p>
+      <p>The train goes 300km/h for most of the trip, has a quiet hum, and a gentle rocking. Apart from entering and exiting tunnels, it doesn’t feel blisteringly fast and it’s not so smooth and quiet that you forget you’re on a train. But that’s not to say it isn’t very impressive. You’re moving fast enough through the countryside for there to always be something interesting to look at and the sound and feeling of being on the train is very comfortable. Although I had a great experience with the High Speed Rail and would happily choose it over flying in the future, one very notable drawback is that you don’t stop feeling the motion of the train until the next day. I continued to feel the vibrations and mild nausea after stepping off the train that remained with me until I was able to sleep it off. </p>
+    </div>   
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">The Train Food</h5>
+    <div class="three-col">
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczPePl4L-yKUYfm8kIYKKqfQoR-F2VwOj7KfksNydfqUZxPNaeIQQDSemDZOA3K7Z-NCg4W8y9A8J52QsmIR04-A1SaKRDihYGhGZ-3t2I7dVZG-anJFJyaYFJv3O28gJ1Ymo4p92Q8Y5KN2IxX6PiHW=w1570-h1570-s-no-gm?authuser=0" alt="Photo 1" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Crackers, peanuts, and bouncy tofu</p>
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczO5uIStePy4TevgPEjPYrnc5mVpnJ4e_jMcYQ1Fe3VM9r5OWYOL9_A8foTEsla07GgcK8RFYwQTAJmRbvFNCNkYwut403PA2z01WWnotfEJ3S2kzHMQWTR7gNHrXwHE9me3nW9_D_GHZAYBnD3mOg4H=w1570-h1570-s-no-gm?authuser=0" alt="Photo 2" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Crackers, peanuts, tofu, and candy</p>
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczNT6X_3wJlw3pboLt37Au62KwMzacMAuodCyfJOTV4-UEVf0w5KlDm50W1dsnKDYeJs1OvQwiqfSD59taZkXsZ92ofhxFUzkeiaVZfjG_qwRWkMSP-MXwrZM_ExybIUQWU61kJw9Kf__W0TYtDbKZcn=w1570-h1570-s-no-gm?authuser=0" alt="Photo 3" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Beef jerkey, wasabi peas, crackers, and dried cherry tomatoes</p>
+      </div>
+    </div>
+    <div class="para-spaced">
+      <p>I didn’t receive any food in 2nd Class. In 1st Class I was given a water bottle and a snack box that was different each time. The snacks weren’t anything impressive, mostly a small amount of nuts, tofu, and crackers. You’re allowed to bring any food you want onto the train and there are lots of food options in the stations. You’re also able to order food through the train app from stations you’re passing through. When the train arrive, the crew will collect the food from the station and bring it to your seat. I tried to figure this out, but that feature is only available in the Chinese version of the app, it’s not available at every station, and it didn’t seem all that popular. Most of what people were eating was food they brought themselves. The crew will walk around with premade Starbucks drinks for sale as well as tv-dinner style meals. The only other time I saw them selling anything was when I was in 1st Class between Shanghai and Xi’an and a cabin crew member went around selling old money and collectible stamps. The train’s meal car looks the same as it does on Amtrak, but with Chinese food options.  </p>
+    </div>  
+    
+    <div class="spacer-md"></div>
+    <div class="clearfix">
+      <div style="float: right; margin-left: 24px; margin-bottom: 8px; width: 180px;">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczOs7uvVY1puI_NCMCOgG6b4REovB3mrCEHDmxzLMPLue-qpFN4ch2Vb4SmzIUEjZ9mJepiR9Lmhu4Z63MeIXJo7F5dKQT18pVoK7wPE1ZOZ3kHBUw5RIdexfnXcDOdke47F2ZOj3EUQ61yUZR8EIUcM=w882-h1570-s-no-gm?authuser=0" alt="Portrait" class="img-right" width="180" height="320" loading="lazy" style="border-radius:6px;">
+      <p class="img-caption">Bean soup</p>
+      </div>
+      
+      <p>My trip from Chongqing to Hong Kong was the only time I experienced a delay in transit. We were stuck for about an hour outside of Guangzhou. After we started moving again, the crew came through the cabin and offered everyone a can of bean soup. The can came with a spoon under the lid and I'm fairly certain it's intended to be eaten at room temperature. It tasted exactly like you'd expect a can of beans in bean goo to taste. </p>
+    </div>
+        
+
+    </div>  
+    
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">The Landscape</h5>
+    <div class="two-col">
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczPD2UJuCTxEjoybfQec9-ttuZbubzWnE-v96xgxt_n01EC9_f4xclEx2nMHODCyp_bnxp-c9OVaQN97OvusCuN3P3qxB3I838X6xTxX-sHwSEo4QCxq2NdSVgQwKKt9-mvKlHBrjXfu2uZGrHs0cGi_=w1090-h1454-s-no-gm?authuser=0" alt="Food" class="img-full" width="360" height="40" loading="lazy">
+        <p class="img-caption">2<sup>nd</sup> Class</p>
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczNxPB3Bv4gEJ6u2WPbYtRiG_-xoycPc2HL5gi9SL9xp-sPocKT_pPD2EYbpdq1O4WQayULLCFB5BVWYr4G0pq2J-HriFl2ZXuvpjY7qtuYP7C5urDqEQrxP942MSx0_JtfsdtK7gcU6PMDin_pTb8Nw=w1090-h1454-s-no-gm?authuser=0" alt="Market" class="img-full" width="360" height="240" loading="lazy">
+        <p class="img-caption">1<sup>st</sup> Class</p>
+      </div>
+    </div>
+    <div class="para-spaced">
+      <p>the landscape insert text here</p>
+    </div>  
+    
+    
+       <div class="video-wrap">
+          <iframe
+            src="https://youtube.com/shorts/mCX5aFNepsU?feature=share"
+            title="Tunnels to Shanghai"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <p class="img-caption">Tunnels to Shanghai</p>
+      </div>
+ 
+       <div class="video-wrap">
+          <iframe
+            src="https://youtu.be/uXObYJD3st0"
+            title="Construction Outside Shanghai"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <p class="img-caption">Construction Outside Shanghai</p>
+
+
+  <!-- 
+  ============================================================
+       The Hotels
+  ============================================================ 
+  -->
+
+
+  <div class="section">
+    <p class="font-playfair size-xl">The Hotels</p>
+  </div>
+  
+  <p>The hotels in China were great. They have all the standard amenities of Western hotels, except they all came with tea instead of coffee. I opted for nicer hotels that were more centrally located to make life easier for myself, but you could easily find perfectly fine hotels for half of what I paid. Some hotels offer windowless rooms or rooms that face an interior corridor. My Shanghai room had a window that opened to a carpeted hallway with a door at the end. The ceiling went to skylights in the roof. The window didn’t really help with fresh air and all the windows to the rooms are opened when you arrive so you could hear everyone in all the other rooms. I closed the window and with the sheer curtain drawn, you forget there’s not a real window.  </p>
+  <table>
+    <tbody>
+      <tr>
+        <td>Shanghai</td>
+        <td>Sushi Light Hotel</td>
+        <td>$61/night</td>
+      </tr>
+      <tr>
+        <td>Xi'an</td>
+        <td>Orange Hotel</td>
+        <td>$57/night</td>
+      </tr>
+      <tr>
+        <td>Chongqing</td>
+        <td>Haoting High-Rise River View Hotel</td>
+        <td>$55/night</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="para-spaced">
+  <p>Each room came with a fancy electric toilet that I continue to be too afraid to use to the fullest. Two of the three came with Amazon Alexa style talking speakers that you could speak to in Chinese to control the room. Projectors instead of TVs were very common and a highly advertised feature is connecting your phone to the screen. The Chinese television channels I briefly flipped through were not all that interesting and mostly seemed like historical dramas. Western apps don’t work so there’s no Netflix or Youtube. Checking is as simple as giving the front desk your passport so they can send a copy to local authorities telling them you’re here and handing you your room key. The real name verification (read more in The Apps section) makes everything really simple. There was coffee available in 2 hotels in the lobby. </p>
+  <p>The names of the hotels are confusing. They have English and Chinese names and the English names are slightly different across different websites and maps. I could not find the Shanghai hotel on the Chinese Amaps or on Google Maps, but it was on Trip.com and the Chinese name was on Baidu Maps. In person, there was no sign for the hotel and it was just off a pedestrian street on the fourth floor of a market. Trip.com is what every Chinese app points to for booking so I trust that anything listed there is correct despite the website looking like it’s giving you a virus. </p>
+  <p>5 star hotels are the most expensive, but are significantly cheaper than in America. However, they seemed primarily geared towards business travelers and couples looking for a retreat so I opted for cheaper more interesting options. </p>
+  <p style="margin-bottom:16px;">My Shanghai hotel was right off Yuyuan Old Street. The vibes were fantastic and I loved being there. Minus one star for the corridor view window. 4 stars. </p>
+  </div>
+
+<img src="https://lh3.googleusercontent.com/pw/AP1GczOP-xcs-tMzW8iUBrxpAJwiksgpeT5qnn19smDffbh6i2QnfkwFVLM2DCYmgvDgG5csj1g5FAl3y5AWzODNuhMulnQZWdn0ffo-S2jO5ndQBSwRNRe3aRqDCdvZmKKqcicM4oUtDkNSGdgX0lrixDiq=w1784-h1338-s-no-gm?authuser=0" alt="A street scene" class="img-full" width="760" height="400" loading="lazy">
+<p class="img-caption">Shanghai Hotel</p>
+<div class="two-col">
+  <div>
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMRXfcfLkvIl9NcsCCMBsuYZ0Lld7hROhJ0eZ7onJa83MwMogjkAwYTk15clCOqSDpb11fZL-4THrKYytr0bJNysBjnUeKb8tmYSqdCz9BpzcxDUxdAG7eRnsnJGscDd5anUbwM8oS8Faampv_blkIs=w2094-h1570-s-no-gm?authuser=0" alt="Food" class="img-full" width="360" height="240" loading="lazy">
+    <p class="img-caption">My Shanghai Hotel Exterior</p>
+  </div>
+  <div>
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczOKJABImJLPdYybP2viHz9auroXYRgIhVjjFkuY_fy37rWuIcVzKnFP2L1Omjadn2_4eOqNixMiaOlwmA4oU9xGh1mb2O7tyy82oPIein4NGr2nrVHtF2F2iVnKen3xpXxEVqgvmcNDiUYCOXhtv0HX=w2094-h1570-s-no-gm?authuser=0" alt="Market" class="img-full" width="360" height="240" loading="lazy">
+    <p class="img-caption">The Street Outside my Shanghai Hotel</p>
+  </div>
+</div>
+
+<p style="margin-bottom:16px;">My Xi’an hotel had a view of the Mind Dynasty Drum Tower. It had a third-floor patio and was directly off the pedestrian street going through the Muslim Quarter. I could not have had a better experience with this hotel. 5 stars. </p>
+<img src="https://lh3.googleusercontent.com/pw/AP1GczPWSccPbofrfbV05nuvH-KoK35ZxUkQYnbAh29GfMv02joQdUB1DIbvYf4HmIYbKTTMelsUJxK2wwohWL5RbZbMcbHcx5CVMxscxlRQwXl5pXyGbOmrDeG3gkGyLucgh5mgYJmklEGkttrifRXNAF3B=w1784-h1338-s-no-gm?authuser=0" alt="A street scene" class="img-full" width="760" height="400" loading="lazy">
+<p class="img-caption">Xi'an Hotel</p>
+<div class="two-col">
+  <div>
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPJtvy5W8QRDs62s3Pk6HsAs7WewH8I_nhIFhJgGehmfQCjhjNmT-638KNFk71PQeKMFdarhDrop5Zhm-fjD7dkluIMDffJ-dzg158XUEn2Kz5tr1ITpq4spVwsFHyc6xjIkaayVExMjNR07sj8d9YL=w2094-h1570-s-no-gm?authuser=0" alt="Food" class="img-full" width="360" height="240" loading="lazy">
+    <p class="img-caption">Xi'an Drum Tower</p>
+  </div>
+  <div>
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPt1_-oPmGbB44r491_dy74A2fwlfKLhZ_oI0_-_-Ycd0xc3jfUu4LB1Lqah_MSHDZaABNelFSxlq8cffqqwKPqlcwWZ7RwnxGhXXyOuIOQZWauxQs8mDg-PQzMsfnXOqhxRPbJAz9SvQx8cQmnMi5g=w2094-h1570-s-no-gm?authuser=0" alt="Market" class="img-full" width="360" height="240" loading="lazy">
+    <p class="img-caption">Xi'an Hotel Patio</p>
+  </div>
+</div>
+
+<p>My Chongqing hotel was right off the Jiefangbei pedestrian street in the middle of the city. It, along with many of the hotel rooms in Chongqing, came with a free standing bathtub as well as a complementary “exquisite selection of Chongqing treats” which were all pretty mid. The front desk had coffee and the views were nice, but it wasn’t anything special. 4 stars. </p>
+<div class="two-col">
+  <div>
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczOcHM1QcMuLH3NnfEqnUYcWdronVjh02h_t0JAHFLHLQdqK12UAdBmC0YVXALiInt_qrnqx67Ne9PLN39qfcfXvmdxAleMdmVQ3GTB1e5mKHh6UCs_y0MOxcJUPLlHlRN8kg0VK-f6oKWfNP8SB3_89=w1784-h1338-s-no-gm?authuser=0" alt="Food" class="img-full" width="360" height="240" loading="lazy">
+    <p class="img-caption">Chongqing Hotel</p>
+  </div>
+  <div>
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPrCTYOjUu3jlG7H_poarPUVwqq1uiz6EhwQPCUHjV5l0NxYlgv46amtHA2pdgjjMFwfTsotVcYrIGa8AQgL16EeXcl_erNu7M2SWt8zhI3FmtqmzVB7yjx7YLRzBhRf5ffhLocMwp5vhs8mlD6EwRf=w1784-h1338-s-no-gm?authuser=0" alt="Market" class="img-full" width="360" height="240" loading="lazy">
+    <p class="img-caption">Chongqing Hotel</p>
+  </div>
+</div>
+
+  <!-- 
+  ============================================================
+      The Subway
+  ============================================================ 
+  -->
+
+  <div class="section">
+    <p class="font-playfair size-xl">The Subway</p>
+  </div>  
+  
+    
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMCA9g_QH7bKmfO1QHK-IWbC_gvSf1uZkLN4D_EwcUSlQ_akx3jKHKJ6Jx6jg5rkWD6EDCdwXjUs-5jxRQVEtopycE2a8KLjlpBrmw-FmczfI0AYT3Fw4Fyd9nJXzb14RUM9NIorHeIpGGgO-CQ8MKh=w2772-h576-s-no-gm?authuser=0" alt="Shanghai Subway Line" class="img-full" width="760" height="400" loading="lazy">
+    <p class="img-caption">A Shanghai Subway Line</p>
+    
+    
+    <p>All three cities had fantastic subway systems. The systems are extensive, the trains are fast and frequent, and the cars are clean and air conditioned. All of the stations were displayed in both Chinese and English and between each stop a voice would tell you the next stop and the connecting lines in both Chinese and English. They’re very similar to the Hong Kong subway system and I never had any trouble navigating any of them. </p>
+    <p style="margin-top:16px;">The stations, especially the centrally located ones, are extensive. They are both an entry point to the subway as well as passages for pedestrians to move around busy areas without having to cross streets or experience bad weather. You can go in one entrance and come out a few blocks away without ever entering the actual subway. Map apps helpfully specify in their directions which entrances and exits to take so when you get off at a station you know how to exit closes to your desired destination. Each entry and exit has a number or a letter and there are signs everywhere to help you navigate. </p>
+
+    <div class="three-col">
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczMJClGXqx5iAzjtLtVDlfb93pcaR9n5XuTC96AaVMBIMIY0xkacGbrdkT24YoKBveh0sFiEfgDQrunuOxyHxPEv-95vc2XAXNf9apT5uV1cwEjC5iu66AkQ5nSsxAy1xtDP3PXQ1_DBKmGhJd8mTYgy=w1574-h1574-s-no-gm?authuser=0" alt="Shanghai Subway Map" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Shanghai Subway Map</p>
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczPdSWWjiM1ykYrOYitXzdrW6TFFEzQGL36ZK4rqFBF0eXYx2nIyJbCqzO-eNlV6XYKhTnvrTS7zNE8Sav3GK7oyib9Q7aBhjKmqlM8MilI7gy5Xe1xKBvzTvOx9H3UBoPVh6b5oimaKq7tLfAfq3qgQ=w1574-h1574-s-no-gm?authuser=0" alt="Xi'an Subway Map" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Xi'an Subway Map</p>
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczP0fqUnlpFlJlaR_jUKazG2kH9-ru2oAg0QJL5ffbS_4iIPFxbW8WdP6aZDogyTm-0LnuBQmpl9PbjIEvjkopDzA6M2-QQB0o3aJs5XB3XcHfMWpff7_cB70KAHgF_03kckJa0bJw6Tp5BwHT6upvEt=w1574-h1574-s-no-gm?authuser=0" alt="Chongqing Subway Map" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Chongqing Subway Map</p>
+      </div>
+    </div>      
+      
+    <div class="clearfix">    
+    <div style="float: right; margin-left: 24px; margin-bottom: 8px; width: 280px;">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczO3cf6LHq1ncWLeSxf8H3XuAQSW--YzWflW3UecL33O5_kmt37T1OaixJMVoJ4VoV-F0ndOjC4qFwF0Oy2gFv9LtJOIDNV7cQ3r7Wk4Gkn5hKlljJiQORM7udkiZdoh_nLYZ2g0TQsANMq7DdS0rexW=w1514-h1136-s-no-gm?authuser=0" alt="Subway Entrance Gates" class="img-right" width="280" height="320" loading="lazy" style="border-radius:6px;">
+      <p class="img-caption">Subway Entrance Gates</p>
+      </div>
+     <p>When entering the subway system, before you reach the turnstiles there are security checkpoints. Similar to the security at an airport, your bag gets scanned, you walk through a metal detector, and liquids get analyzed. It takes less than a minute to get through and I speak more about the experience in the “The Security” section. </p>
+     <p style="margin-top:16px;">Immediately after security are the turnstiles. In each station there are QR codes that direct you to each city’s specific transit mini-app that you can add to Alipay or WeChat. To get through the turnstiles you pull up the QR code in the mini-app and scan it. You can also use a credit card and I think Chinese citizens can use their ID cards. Physical paper tickets are available in ticketing machines, but I’m not sure why you’d use them. In some cities like Xi’an you can use your face as your ticket since your face, ID, and payment methods are all linked. </p>
+    </div>
+    
+       <p style="margin-top:16px;">The passageways between the turnstiles and the platform hosts a widely-ranging quality of décor. The busier Shanghai stations had the aesthetic of an upscale mall, while the more residential stations looked like the interior of high school with no extravagant flourishes in design and walls and floors made to look nice enough while being easy to clean. Most stations had bathrooms that were acceptable. Unlike Hong Kong, most station didn’t have convenience stores selling food. Xi’an had very cool wall art that highlighted the history of the city and reminded me of the once beautiful, but now dilapidated tile and ironwork of the New York City subway system.</p>
+      <div class="two-col">
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczMxVNDiZJW2ndnfjPaIgUVQ_1u4lWqKf08SqENFMX-eFp9ef3jQks6wkPsxy-lEJYAbw60GqMqZIGqr2tii9mD31EIJFPU1EKdYAkyu50gQhIR9s9sRy90xLlqI09mgXfj3sIZZPs997Wg3d8xhsXL6=w1298-h974-s-no-gm?authuser=0" alt="Interior of Yuyuan Garden Station in Shanghai" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">Interior of Yuyuan Garden Station in Shanghai</p>
+        </div>
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczNNvjYRME7GTGusqrjFbmWQ9sCm1uMTk5ma-kbKaJkzjvlq584AR3vsY04KZtNHVcI67apVxhj9_SZM0Cnv5OJp6793ldZeRhyzPALTDKu0s8HUmE4E6HWNEH4zU6hqOomjuU2wVxECmePNVrgVnHQU=w1298-h974-s-no-gm?authuser=0" alt="Wall Art In A Xi'an Subway Station" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">Wall Art in A Xi'an Subway Station</p>
+        </div>
+      </div>
+
+       <p>The platforms were clean and spacious. They had screens that played ads as well as screens that would cycle between helpful information about the status of the trains and brief clips about the weather and top news stories. The platforms were all air conditioned and every platform in every city had glass doors between the platform and the track. Behind the glass doors were rows of ads, the one pictured below is for Domino’s Pizza Croissant Crust Pizza.</p>
+      <div class="two-col">
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczPnBq8gWMLLMSYMormwT3lzCsugp96wzzPQd8CQrm9EiPsjQsmDK-LA45QNgff_uaJWP6F5RrsrJO2zO_oZ9dUUNoj49jqEGMmfDp1ufhuBFk5ETsrDOB3rvqRVX4KefSa_XZfhalvub_1H-pCL97og=w1514-h1136-s-no-gm?authuser=0" alt="Hongqiao Subway Platform in Shanghai" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">Hongqiao Station Subway Platform in Shanghai</p>
+        </div>
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczOkaEJxyXuc1AHkh2uI0-qPlTwv020yFjqEzuD-Aof0yuOwNDPvCIb0TnvbjZVs7aHbmjpkGyrkIyz4bLRQ_FYvmvj9dJVZ9NQxEwS5WeRn1Onrf04oRxkFcgAXFycvGgLk6DS1AJz634Ed7CWiSj5M=w1514-h1136-s-no-gm?authuser=0" alt="Site of the First CPC National Congress Station Subway Platfomr in Shanghai" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">Site of the First CPC National Congress Station Subway Platfomr in Shanghai</p>
+        </div>
+      </div>
+      
+       <p style="margin-bottom:16px;">Some stations had real time info on the arriving trains. The picture to the right shows the next three trains will arrive in 3m40s, 10m39s, and 17m39s and the bottom green bar shows how full each of the cars are to help you choose the one that’s least crowded. Printed on the floor in front of each door are arrows showing you where to queue in order to allow the people exiting the train to get off without everyone bumping into each other. In Shanghai and Xi’an people were agreeable in this regard. Chongqing was a free-for-all despite there being ample time to let everyone off the train before boarding. </p>
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNgZsJGgXRY_VnOSE8YCDLuBnRPWXd8-WuOLTTPk0wl99HVubzNM5q7yNcD907EgxDzRd3YotB4w_TXJER2bVCf5-RDEVodal_0F8ikrA1m0tjK-jq7GTUBu_TrEYCfdovlhJhdB0OAJt6icDpblEFv=w2020-h1136-s-no-gm?authuser=0" alt="Subway Car Details" class="img-full" width="760" height="400" loading="lazy">
+    <p class="img-caption">Shanghai Subway Car Details</p>
+          
+        <p>The subway cars themselves were one long continuous air-conditioned tube. All of them were seemingly very new and there was usually a single company’s ad plastered everywhere. The tracks are either new or well maintained, because the ride was quiet and smooth. I never felt that a subway car was too crowded and nearly everyone on the trains sat or stood quietly, mostly looking at their phones. </p>
+      <div class="two-col">
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczM-_Npn9iUoMZhN6AoyaPB2rPoruDeXi5l8-2hUTHQfGRbvcMtDHj3bpultHVrG5y_6a_2USrQta_QlbUK3zv33iP4odxnLYdDkH5x2QHNe4VFKeMadCj73-NDfC211bcFoV3XhNMnPfaBzYTjHTKa6=w1968-h1574-s-no-gm?authuser=0" alt="Ads Inside a Shanghai Subway Car" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">The Interior of A Shanghai Subway Car</p>
+        </div>
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczOo0dE9UaFH1Y5dyZppObirDCeC3M0IT5QLdf8Mcvi9968M587oy6Itn3rGt_sZJ8xUXZ_z-152ZgQZfLmslWS4aZ-cizxBBq9zeakaClOiEEZ-Jo59GWhAIZ32sHi6Ho3hJOT8CRHqrNOM8vRRoYto=w1968-h1574-s-no-gm?authuser=0" alt="Lengthwise View of A Shanghai Subway Car" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">Looking Down A Shanghai Subway Car</p>
+        </div>
+      </div>
+
+     <p>Most stations were a single escalator below ground. Chongqing however, having been built on a mountain, had some stations that were <em>very</em> deep underground. I took the below video in one such station. </p>
+    <div class="video-wrap">
+       <iframe
+         src="https://youtu.be/6jfqMmCg8XQ"
+         title="Escalators Into a Chongqing Subway Station"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+         allowfullscreen>
+       </iframe>
+     </div>
+     <p class="img-caption">Escalators Into a Chongqing Subway Station</p>
+
+  <!-- 
+  ============================================================
+      The Visa & Entering China
+  ============================================================ 
+  -->
+  <div class="section">
+    <p class="font-playfair size-xl">The Visa & Entering China</p>
+  </div>  
+  
+     <h5 style="margin-top: 24px; margin-bottom: 12px;">The Visa</h5>
+
+      <div class="clearfix">
+      <div style="float: right; margin-left: 24px; margin-bottom: 8px; width: 280px;">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczMOuVfaZwFo5bAdQNlhK5P-DQW30suTddk0Nrav8VtCFycX-r0pmfAtpOLmv-MT7uD4nLRIL1AVL2TJMCANURM3JGiapj5KWb6OXYqVRxmi3nyM9UsDo04Mu8tgHeQRRVp8p2tIaKJ7t97NyZk5miu7=w1619-h1214-s-no-gm?authuser=0" alt="Chinese Visa" class="img-right" width="280" height="320" loading="lazy" style="border-radius:6px;">
+        <p class="img-caption">Chinese Visa</p>
+        </div>
+        <p>Americans need a visa to enter China. I needed to fill out a form on the website of the Chinese Embassy in Hong Kong and once that was approved, I dropped my passport off at the Chinese visa office. Three days later I paid the $171 fee and walked out with the visa in my passport, valid for 10 years and allowing stays of up to 60 days at a time. </p>
+      </div>
+
+     <h5 style="margin-top: 24px; margin-bottom: 12px;">Entering China</h5>
+     <p>Hong Kong connects directly to the mainland High Speed Rail system so I went through Chinese immigration at the Kowloon Station in Hong Kong. In the same building, I first went through Hong Kong security to “leave” Hong Kong and then through Chinese security to “enter” China. The experience was nearly identical to flying internationally. The train ticket is directly tied to your identity so you scan your passport and fingerprints to get through the first gates. Then there’s a bag scanner and metal detector and you’re “out” of Hong Kong. You walk to the Chinese immigration, fill out an immigration form and scan your ID and prints again to “enter” China. The last step is a final metal detector and bag scan before you enter the train terminal. This was a smooth and easy process that took about an hour. There were hardly any lines, but it took a while to walk and fill out the immigration form.</p>
+     <p style="margin-top:12px;">When you arrive in a Chinese city you’re required to check in with local law enforcement, but if you’re staying in a hotel, they’ll do this for you. </p>
+
+  <!-- 
+  ============================================================
+      The Security, The Surveillance, and The Police 
+  ============================================================ 
+  -->
+
+  <!-- 
+  ============================================================
+      The Technology
+  ============================================================ 
+  -->
+
+  <div class="section">
+    <p class="font-playfair size-xl">The Technology</p>
+  </div>  
+  
+  
+    <p>I was very excited to see the Huawei, Xiaomi, and Hero stores in mainland China. It’s illegal to sell a lot of Chinese consumer electronics in the US so it was really cool to see this “illegal” technology in person. Compared to what’s available in America, the software feels a generation behind, the hardware feels competitive, and the design innovation feel a generation ahead. </p>
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Phones</h5>    
+    <p style="margin-top:12px;">China has 3 distinct phone ecosystems:</p>
+    <p style="margin-top:12px;"><b>iPhones: </b> iPhones are the premium international option and are about a fifth of the market. They are the most expensive phones and were, until recently, technologically the most impressive. Apple has 2 distinct app stores, one for Mainland China, and one for the rest of the world. Access to these app stores depends on the location tied to your AppleID and linked payment methods so you can’t easily access one or the other by crossing a border. </p>
+    <p style="margin-top:12px;"><b>Everything Not Huawei: </b> This includes Vivo, Xiaomi, Honor, and Oppo and is about 65% of the market. They all run on Android operating systems and use Qualcomm (American) or MediaTek (Taiwanese) chips. When sold internationally they run Google-supported apps (Google Play Store, Youtube, Gmail, Maps, etc) and when sold locally, because Google is blocked, they run only apps from each brand’s Chinese app store. </p>
+    <p style="margin-top:12px;"><b>Huawei Phones: </b> Huawei phones are the premium domestic option, but there is a lot of competition and all Chinese brands compete across all price levels. Huawei had the same system as the rest of the Chinese phone companies; their phones had an Android operating system that ran Chinese apps domestically and Google apps internationally. In 2019 the US forced Google to cut off Huawei’s access to all Google services and Huawei lost its ability to sell phones that run anything other than Chinese apps. You can still buy Huawei phones outside of China and the US, but there’s no reason to unless you only want to live in the Chinese app ecosystem. Because, Huawei is now largely a Chinese only brand, they developed their own operating system, HarmonyOS, and are positioning themselves domestically like Apple did when they created iOS. They’ve also developed their own Kirin line of chips (which are a generation behind), so they’re the only Chinese brand whose software and hardware is entirely Chinese. </p>
+    <p style="margin-top:12px;">Everyone I know in Hong Kong has an iPhone. There’s no reason to buy a Huawei phone outside of mainland China, but other brands like Xiaomi, are widely available here. They run on Android and use the google ecosystem the same way a Samsung phone does. Their reasons for choosing iPhones are that it 1) works with the apple ecosystem, 2) is built for English speakers and the Western internet, and 3) Chinese phones have a bad reputation for adding filters to photos. </p>
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Laptops</h5>    
+    <p>80% of Chinese laptops run on Windows with the remaining share split between Huawei’s HarmonyOS and Apple’s macOS. Lenovo is a Chinese company and has a plurality share of the mainland laptop market because they’re you’re standard student and business Windows work laptop. Apple is the premium international option and Huawei is the premium domestic option. Asus has premium gaming laptops and Xiaomi, HP, and Honor are mid-range options that make up the rest of the Chinese laptop market. Chinese laptops look just like Western computers with English QWERTY keyboards. Non-Huawei laptops use Intel and AMD chips with Intel, AMD, or Nvidia GPUs. Huawei cannot buy Intel chips so they use their internally developed Kirin CPUs and GPUs. Huawei’s HarmonyOS cannot run Microsoft Office or Adobe and apps have to be specifically designed to run on it, so it’s pretty limited. But it can run the Chinese equivalent of Microsoft Office, integrates into the HarmonyOS ecosystem if you have a Huawei phone, and it’s made of entirely Chinese parts so it gets support by purchases from government agencies and state-owned enterprises. </p>
+    
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Software</h5>    
+    <p>My understanding from messing around in the Chinese phone stores, using the Chinese apps I’ve downloaded, seeing what other people do on their phones in public, and using Chinese websites and AI, is that Chinese software is not as good as what’s available in the West. Visually, Chinese websites and apps are cluttered and don’t rescale well if you change your browser size. There’s text everywhere and it kind of resembles Trip.com’s aesthetic where it looks like you’re always one click away from getting a virus. Even in Hong Kong, websites look like they’re from the early internet. I think this is less of a problem than it would be in the West, because most of what you use your phone for can be accomplished in Alipay or WeChat where the mini-apps generally work very well. More details in “The Internet” section.</p>
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Hardware</h5>    
+    <p>Chinese phone and laptop hardware is competitive with Western hardware because a lot of it is Western hardware. Samsung and Xiaomi use the exact same Snapdragon chips in their phones. Huawei’s hardware is a generation behind because they’re developing their own proprietary hardware. Chinese batteries last longer and charge faster and Chinese phone and laptop screens are brighter, but these are design choices that Western companies could impalement if they wanted to. Phone cameras are better on Western phones, but, again, the hardware is the same, the phones are just designed differently. I tried the max zoom (10x) on the Huawei Pura 90 Pro Max (950-1,250USD), and the 10x zoom on the iPhone 17 Pro Max (1,300-2,170USD) in the Apple store and they both seemed to be equally better than my iPhone 13 Pro Max. Chinese phones process images differently than Western phones and the result is widely thought to look worse, but I think the quality gap is closing as software improves and as more Chinese phones implement phone camera add-ons. </p>
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Design Innovation</h5>    
+    <p>Chinese tech is way ahead of Western tech when it comes to doing new and interesting things. When I was in middle school, there were all kinds of new and interesting phones that were just coming to market. The phones were all shapes and sizes and slid and flipped in interesting ways with keyboards and pens and d-pads. I get the same feeling walking through Chinese tech stores.  </p>
+    <p></p>    
+    
+    <div class="video-wrap">
+       <iframe
+         src="https://youtube.com/shorts/lomgcYPxD78?feature=share"
+         title="Hauwei Mate XTx"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+         allowfullscreen>
+       </iframe>
+     </div>
+     <p class="img-caption">Huawei Mate XTs</p>  
+
+    <div class="video-wrap">
+       <iframe
+         src="https://youtube.com/shorts/YpvWQUZzsDg?feature=share"
+         title="Hauwei Mate X7"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+         allowfullscreen>
+       </iframe>
+     </div>
+     <p class="img-caption">Huawei Mate X7</p>  
+
+    <div class="video-wrap">
+       <iframe
+         src="https://youtube.com/shorts/QEbGHX_dHFg?feature=share"
+         title="Hauwei Watch Buds 2 pt2"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+         allowfullscreen>
+       </iframe>
+     </div>
+     <p class="img-caption">Huawei Watch Buds 2 pt2</p>  
+
+    <div class="video-wrap">
+       <iframe
+         src="https://youtube.com/shorts/lWIx9bVyqRc?feature=share"
+         title="Hauwei Watch Buds 2 pt1"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+         allowfullscreen>
+       </iframe>
+     </div>
+     <p class="img-caption">Huawei Watch Buds 2 pt1</p>  
+
+    <div class="video-wrap">
+       <iframe
+         src="https://youtube.com/shorts/s1qYsbnNWZ4?feature=share"
+         title="Hauwei Pura X Max"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+         allowfullscreen>
+       </iframe>
+     </div>
+     <p class="img-caption">Huawei Pura X Max</p>  
+
+    <div class="video-wrap">
+       <iframe
+         src="https://youtube.com/shorts/ACFkvNC6HAA?feature=share"
+         title="Hauwei Pocket 2"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+         allowfullscreen>
+       </iframe>
+     </div>
+     <p class="img-caption">Huawei Pocket 2</p>  
+
+    <div class="video-wrap">
+       <iframe
+         src="https://youtu.be/Db1kqcDoY3o"
+         title="Hauwei Pura X Max pt2"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+         allowfullscreen>
+       </iframe>
+     </div>
+     <p class="img-caption">Huawei Pura X Max pt2</p>  
+
+  <!-- 
+  ============================================================
+      The Air Pollution
+  ============================================================ 
+  -->
+  <div class="section">
+    <p class="font-playfair size-xl">The Air Pollution</p>
+  </div>  
+ 
+      <p>I don’t believe I experienced any air pollution while in China. There was a lot of fog and rain on my trip to Shanghai and in the city once I arrived. My Xiaomi watch told me the AQI was between 60 and 110 every day, which is higher than in NYC, but is also upwardly biased by the fog. Half of the cars in each city are electric, so no exhaust, and I never saw billowing plumes of fumes from buildings or factories in any of the cities I was in or at any point during the train rides between cities. </p>  
+      <div class="two-col">
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczPVS-y7c5s3Guq_ielF3U66mHTMYU0Nv2yzmL_BqrAWHdex2FtC5J0OndGqvy06cSh6jJ6ByPUkq-OgZKJ1dmMraXVN86xEixAyKXD3Sv0D2SyYGJcLKnkQ0hWvAdxPdgYhEtDjFIneTPT05jC4zHNU=w1896-h1422-s-no-gm?authuser=0" alt="Shanghai on a Clear Night" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">Shanghai on a Clear Night</p>
+        </div>
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczOBTv2lJHVEtkOARBXAF4Jq5wH3QR98sDSR1LYbie3gseq8qos4XwSjL6WhT3i9uFBGUWGKgoHVXtSMWjMiaAahCltcwUdz1Cky54D7Ha-g058LuhQxJyxBeyZmagMT0XbfA5KetDcCDvZN3F31N81d=w1896-h1422-s-no-gm?authuser=0" alt="Shanghai on a Foggy Day" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">Shanghai on a Foggy Day</p>
+        </div>
+      </div>
+      
+      
+        
+  <!-- 
+  ============================================================
+      The Roads and Cars
+  ============================================================ 
+  -->  
+
+  <div class="section">
+    <p class="font-playfair size-xl">The Sidewalks, Roads, and Cars</p>
+  </div>  
+  
+      <p style="margin-top:12px;">The roads and sidewalks in China are flawless. I did my best to get outside of city centers and I walked between 8 and 20 miles every day (my goal was 20k steps). I never came across a damaged sidewalk or a pothole on the roads. I made judging the quality of the roads and sidewalks a priority wherever I went because in my mind this is one of the most striking differences between the US and China. I didn’t want to claim the roads and sidewalks are pristine if I didn’t investigate them thoroughly. If I had seen a cracked sidewalk or a hole in a road, I would mention it, but I didn’t. Within the cities, every road and sidewalk was maintained to be like new. Granted, I can only speak to the three Tier 1 cities I visited, but I spent 28 hours on trains staring at the space between cities and every road and highway we crossed was either brand new or barely distinguishable from new. (For more details read The Infrastructure). </p>
+      <p style="margin-top:12px;">This isn’t to say the sidewalks were perfect. Chongqing is built into a mountain and Xi’an is ancient so there are places where sidewalks are sloped or they narrow or disappear where buildings encroach or they’re not entirely accessible to someone in a wheelchair or they’re cluttered with bicycles and mopeds and trees and trash cans. But in terms of sidewalk maintenance, they are pristine everywhere. </p>
+
+    <div class="video-wrap">
+       <iframe
+         src="https://youtu.be/Zf76wC2Y7dU"
+         title="The Streets of Shanghai"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+         allowfullscreen>
+       </iframe>
+     </div>
+     <p class="img-caption">The Streets of Shanghai</p>   
+
+
+    <p>A benefit of all of the roads being extremely well maintained is that the cars don’t bounce around and make noise. From the look of the cars, most of them seemed relatively new and about half of the cars in all three cities were electric, which you can tell by the license plate, green for EV and blue for ICE. Because of this, Chinese roads are relatively very quiet. Apart from the occasional heavy diesel truck or loud motorcycle (or the honking in Chongqing), the only sounds you hear next to a road or highway are the tires on the road. </p>
+    <div class="video-wrap">
+       <iframe
+         src="https://youtu.be/eBh48hRQRis"
+         title="The Streets of Xi'an"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+         allowfullscreen>
+       </iframe>
+     </div>
+     <p class="img-caption">The Streets of Xi'an (watch with sound)</p>
+
+     <p>Chinese electric cars are famously better in every way when compared to EVs made outside of China. Faster charging, better acceleration, longer ranges, more features, and at a lower price. I don’t recall seeing an electric car on the streets made outside of China. There were a sizable number of Western made ICE cars, usually from a higher end brand like Audi or Mercedes. Any Chinese citizen who can afford a car can by one, but many of the cities limit the number of license plates. EV license plates are made easier to get than ICE plates in order to promote EV adoption. I took the below photos in the Huawei showroom in Shanghai.</p>
+   
+      <div class="two-col">
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczMUxP1sH6ramtLhhUgf-AsxOaP7j8J1sYiJNc5K29zvr9IlxOxh9bpI921U_68llWDeOvJ32RcSNGRUWf7FqzzmUa8Cg1H_7Ee2m69sWOmw2P_Vnums9GId9mUrfTPv5Pdn7eejJDQAX-NJVhaPdwBE=w1180-h1574-s-no-gm?authuser=0" alt="Huawei Z7 Ultra" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">Huawei SAIC Z7 Ultra</p>
+        </div>
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczMS0NLZmeUv3KFxfhD58Nt9_KtxjzUpDd-ImTvYnfF2d_ZQihs61nM-nSU2Ib_OZshvG6ftEGk-P_jya3rpvfbrFbZTDrdPrr8uObNEg-_5-eNLFr6MBnnrWWU5aupxY1U2xfweAg63O8zhgZwdDugT=w1180-h1574-s-no-gm?authuser=0" alt="Huawei S9T" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">Huawei Stelato S9T</p>
+        </div>
+      </div>
+
+
+      <div class="two-col">
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczOvOTmOwhScgYEAiRTA_fEMERsqPs2BZ_Udx3UsaWpeGAaMvaim21Ac5MSAimibULxDKTkhrCae0oMroIEtVMMFmt8aAdK1MXxjLgPJPQe7zhw6lO-21x1EzBcPe8PRMNULGl8HKRrkFNsGxGzB_tar=w1718-h1288-s-no-gm?authuser=0" alt="The Interior of a Huawei S9T" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">The Interior of a Huawei Stelato S9T</p>
+        </div>
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczOrSg57w7qJXKxELvAzKP_S5LdrFYnKV2gec7rF47OqmeK0Q9n1PyqlYRiwSKFXqVfh1RUgZAj-70BClIfQpdJ6goqrItqYsl_Klv3t5bcU-Tv5ZQyyJo9LVZqzKQ95GocJLK6Iy1KsXnjO3bbkd12t=w1718-h1288-s-no-gm?authuser=0" alt="Interior of Huawei S9T" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">Interior of Huawei Stelato S9T</p>
+        </div>
+      </div>
+
+    <div class="para-spaced">
+      <div class="clearfix">
+      <div style="float: right; margin-left: 24px; margin-bottom: 8px; width: 280px;">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczMQg3QlFXvFvdgmyGfgJjCDgykbaYOnVcrinGR5VkLUUhpZCmhiJFTsuXLc8B_SMQc4rw-vE9RpDE-IbnnMcsKt3-K9jfley0fNVVbXJ7tjZBBbpV1HckYB3wds4xlwX57ST-WDcDJ0MWBlUclbArxG=w886-h1574-s-no-gm?authuser=0" alt="Mopeds in Shenzhen" class="img-right" width="280" height="320" loading="lazy" style="border-radius:6px;">
+        <p class="img-caption">Mopeds in Shenzhen</p>
+        </div>
+        <p>There are a lot of moped in China, but how much of a nuisance they are depends on the city. They seem to be allowed to drive on the sidewalks as if they were roads basically everywhere. There are dedicated spaces all over the sidewalks of the cities for bicycle and moped parking. In places like Shanghai and Xi’an I mostly experienced mopeds on the sidewalk either when food delivery drivers were going to pick up or drop off something or when people were entering or leaving a moped parking space. In central Chongqing, the mopeds were significantly more aggressive and the moped drivers’ courtesy towards pedestrians seemed to mirror the general attitudes of the people of the city (more on that in the Chongqing Vibes section). That said, the mopeds in Chongqing never felt like too much of an issue given that they had to stay on the road in many areas because the sidewalks included stairs. In Shenzhen, the mopeds were unrelenting and it felt dangerous to walk anywhere. Every sidewalk felt like a bike lane with mopeds driving in both directions at all times. </p>
+      </div>
+      
+     <p style="margin-top:12px;">Car traffic didn’t seem to be much of an issue in Shanghai or Xi’an. I saw traffic once while in Shanghai, but the roads were mostly pretty empty. Chongqing had traffic, but never bumper to bumper and only in the highly space constrained tip of the city where the rivers converge. </p>
+     <p style="margin-top:12px;">I took this video to highlight the roads leading to the center of Shanghai. Pay attention to 1) how new the roads look and 2) how few cars are on them. </p>
+    <div class="video-wrap">
+       <iframe
+         src="https://youtube.com/shorts/qDDUgmdE5Qc?feature=share"
+         title="Aerial View of Shanghai"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+         allowfullscreen>
+       </iframe>
+     </div>
+     <p class="img-caption">Aerial View of Shanghai</p>
+
+  <!-- 
+  ============================================================
+      The Malls & Prices
+  ============================================================ 
+  -->
+  <div class="section">
+    <p class="font-playfair size-xl">The Malls, Shopping, & Prices</p>
+  </div>  
+ 
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">The Malls</h5>
+
+    <div class="video-wrap">
+       <iframe
+         src="https://youtu.be/NwU1y6blihI"
+         title="A Mall in Shanghai"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+         allowfullscreen>
+       </iframe>
+     </div>
+     <p class="img-caption">A Mall in Shanghai</p>
+     
+     <h5 style="margin-top: 24px; margin-bottom: 12px;">Shopping</h5>
+
+      
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">The Prices</h5>
+    
+ <!-- 
+ ============================================================
+     The Malls & Prices
+ ============================================================ 
+ -->
+ <div class="section">
+   <p class="font-playfair size-xl">Views Towards America</p>
+ </div>  
+
+ 
+       
+          
+  <!-- 
+  ============================================================
+      The Western Fast Food
+  ============================================================ 
+  -->
+
+  <div class="section">
+    <p class="font-playfair size-xl">The Western Fast Food</p>
+  </div> 
+
+    <p style="margin-top:16px;">I’ve been to mainland McDonalds, KFC, Starbucks, and Tim Hortons. The only other two Western fast-food restaurants I would regularly see were Domino’s Pizza and Pizza Hut. My understanding of Western fast food in China is that the quality of the food isn’t great, there are not any cool China exclusive menu items, and, while the food is cheaper than in America, it’s comparable or more expensive than Chinese fast food. I think it exists because there’s no Chinese equivalent of a KFC fried chicken sandwich or of McDonald’s French fries so even though none of the Western fast-food restaurants are worth visiting, they’re your only option for that type of food. </p>
+    <p>McDonalds – They have Filet-o-Fish, but I wanted to try the longer Pollock Filet Burger which tasted like an extra fried Filet-o-Fish. The Coca-Cola McCool was a coke with soft serve ice cream on top that exploded all over the tray when I dunked the ice cream into the soda. They had both standard Chicken Nuggets and Dipping Crispy Chicken Nuggets, which were real pieces of chicken. The sandwich and the chicken were pretty dry, the sauce was nothing special, McDonalds in China is not worth visiting. Total Cost: $9.45</p>
+    <div class="three-col">
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczOCVV7KqYcsUF5gOHVJhw3qzfWviBngDS1apMargwTDcQwLROKM2To4c94HhIgIWuGuRlKipZMXASIavOQEvZttl48JEAmwh49zBfUh3ZF0rTzuYCLkq2V2-kgBH8-EHW2T3e7peKa-JOXs1F0AyhSg=w694-h926-s-no-gm?authuser=0" alt="Pollock Filet Burger" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Pollock Filet Burger</p>
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczOl5pItCWgD7HgNN0en16APBGUjJExn8CpUhXpRQQBwFW-16EMFDhCf6I1mOZZmy79W3EitkhLHnxUovWLrBgGXH3UaUlrmct0TOp7SPMNm5-Rs1s8LWA248SvrM0vf91sUr3xW_LOfEbs7Z6aWjhPi=w694-h926-s-no-gm?authuser=0" alt="Coca-Cola McCool with Tom Yum Goong Sauce" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Coca-Cola McCool with Tom Yum Goong Sauce</p>
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczO9U8NG4V-q8xA-HpLf_KGDX28J04Px6OpF3HqMC53ywmzs4zaXizBWaz8BvnvIo8s4FckjsUEC5gcWkeYKxv_kBKi8UeLUblL_nvGnFfpKkEqUhLS3zDspx5KnAyyWJx-T6ewjjzYwP8fI1bbUbZ-7=w694-h926-s-no-gm?authuser=0" alt="Crispy Chicken Nuggets" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Dipping Crispy Chicken Nuggets</p>
+      </div>
+    </div>
+
+      <p>KFC – I had this at the Shanghai High Speed Rail terminal before going to Xi’an. It was very popular, but the food didn’t live up to the hype. It was basically exactly the same as what you’d get in America. KFC fries have never been good and the chicken could have been bigger. Total Cost: $11.16</p>
+      <div class="two-col">
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczPAMW5hkqTS7jwq5gSnFKQg9rVbcBrVJacI5PKacxBeJoHvQMxAeSJ-YuVpUsHK0CNsydoDk06k76lXZ1ws_Dk_Emm5pQ5410EJ0ODWZqKJORIC5BNST1GOF2Fw1gtKquMGAFXrd6gmIbig7O3qTc22=w694-h926-s-no-gm?authuser=0" alt="The KFC at the Shanghai High Speed Rail Terminal" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">The KFC at the Shanghai High Speed Rail Terminal</p>
+        </div>
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczNEK2uLPO42ViONa0NYgGZYuHEpwtYisNG5JuLzGepeawzF6WP3awBczOd60T4sNyrCrTHPcnPm2VAv1kvPMsqUXmoHqsa14PTNlt2D5VFhAIIOBKdIhoabKnV3ENsjr-3ZnhTQW62Dn_5pZNfEHb6N=w694-h926-s-no-gm?authuser=0" alt="KFC Food" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">Chicken Sandwich, Chicken Wings, Fries, and a Lemon Americano</p>
+        </div>
+      </div>
+
+
+      <p>Starbucks – I was starving and running late so I got Starbucks out of desperation. It looked identical to an American Starbucks, but with fewer options. They didn’t have the fun US drinks like chillers and frappuccinos and the food case was lacking. I got a scrabbled egg and ham sandwich and a large plain latte. It was Starbucks quality. Total Cost: $9.10</p>
+      <div class="two-col">
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczOEq2DLoK_IcqhtxH3zvje6L--iqk9tEHpysLWLK67dx1RekE8nEkigqILwc_fQDyg6RF58tNtCPFuxFrSoCnG3mkL7B-mj9Reb6BvlQMnJZuEfxCAnW49pEd2EH5ftWN8XRGVeiBK1-U_3JtyZ43gT=w1234-h926-s-no-gm?authuser=0" alt="The Food Case at a Xi'an Starbucks" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">The Food Case at a Xi'an Starbucks</p>
+        </div>
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczM7KpKQBAqS5xFJQnbEhxhkwcf2K3dxsj46tGz91CQSUoAFNTFLj_CxVyYqpyAq5ePMLFVxFeowvMUhBtRoBFKCOvxoL5OaVPhtSLeF46jls2SZ_Z7D6959dW599pplFQI6RMLiArC45NIJQ2Gbeyga=w1236-h926-s-no-gm?authuser=0" alt="Starbucks Scrambled Eggs and Ham Sandwich" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">Starbucks Scrambled Eggs and Ham Sandwich</p>
+        </div>
+      </div>
+
+
+    <div class="para-spaced">
+      <div class="clearfix">
+      <div style="float: right; margin-left: 24px; margin-bottom: 8px; width: 280px;">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczPrpJnq3vJyHGBfcSA2ZwynvZVGBiLTg1y4_-X2bOVTQKkZwgumnvxz_RxURYzzwVLxTaWLznf9i3kNv8bDIHDIPYk6Oq3SfZaDmPMCeeEyW8ZGvxRPY4dSZZemNef1SbVp61vdbwWNIrwk2dMgQWBK=w1236-h926-s-no-gm?authuser=0" alt="Tim Hortons in The Chongqing HSR Station" class="img-right" width="280" height="320" loading="lazy" style="border-radius:6px;">
+        <p class="img-caption">Tim Hortons in The Chongqing HSR Station</p>
+        </div>
+        <p>Tim Hortons – I did have two sausage, egg, and cheese sandwiches and a coffee at the Chongqing High Speed Rail station and they were the best fast food egg sandwiches I’ve ever had. The bread was decadently buttery and flakey, but the star of the show was the runny egg in the middle. I’ve never had such a luxuriously soft egg from a fast-food restaurant. Instead of waking up late and getting lunch, I should have been waking up early and going to Tim Hortons for breakfast. Total Cost: $10.75</p>
+      <p style="margin-top:12px;">To Harshil and everyone else wondering, I didn’t order 1 individual Timbit for two reasons, firstly, because I’m not a psychopath, and secondly, because I don’t think Tim Hortons in China sell Timbits. I didn’t see them offered at any of the locations.  </p>
+      </div>
+      
+      <div class="two-col">
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczOtquQLd72reyVxrbefjCMoqfooHi5M1Cwg8RJewjzitkdz9ruH-cd2UgHkL4fzPJLT_Yw-e88CltXxAkf6Ssftk0U2JGlzOL-JUFw_T6YBUaxJVFuVvShP2hvK8jCoKfVfUHBlGjcNuHiSV-rG2SMp=w694-h926-s-no-gm?authuser=0" alt="Tim Hortons Sausage, Egg, and Cheese" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">Tim Hortons Sausage, Egg, and Cheese</p>
+        </div>
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczNcVCruRbIyQRr2rqJv36DqwIXZVJhwLzZXb8xFu-cSz3rZD4Ys5Pav3V5BYtXk931X663OW1H6pMHnJC6UIulmKig3P_hiHw71xs631qY2QJ-yOcvXaDJ8iNewvCuze5urZmoObBtOiIhg54xLKDGo=w694-h926-s-no-gm?authuser=0" alt="Tim Hortons Sausage, Egg, and Cheese" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">Tim Hortons Sausage, Egg, and Cheese</p>
+        </div>
+      </div>
+
+      <p>Pizza Hut - While I didn’t visit a Pizza Hut in China, I have been to one in Hong Kong and they’re fun because it’s an upscale dining experience with real menus and table service. I saw this Pizza Hut truck outside the Xi’an Museum that exclusively sold burgers. </p>
+      <div class="two-col">
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczM7mChHQD3MXEUfwPYfgacobHbdGHoUZ1zjzx-6EEShpVTrgaOKsj6rbNV2x6YqugC-Tug3xSCIT0E_r-fpskXFK6rDOYPBXcd9-nl4fFF33z0ns5T79qDMPA230jkmSuqbM4fm2cqe-yCqHzRwlA_z=w1234-h926-s-no-gm?authuser=0" alt="Pizza Hut Truck in the Park Outside the Xi'an Museum" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">Pizza Hut Truck in the Park Outside the Xi'an Museum</p>
+        </div>
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczNgOLBaRuFowbo0MhTOZftk3ZS49FChernOfkSz5mBr90nd_mgh-zJNs30DWCNl6DFXB5Vw8rGtMgOzEN1hYx5w9aDy9V27DHbs-abXgJ4anU0dlq7IwNPQDwGIS5mSslmx8_fmv-ABvbasLw_1IQMp=w1314-h1496-s-no-gm?authuser=0" alt="Pizza Hut Truck Menu" class="img-full" width="60" height="40" loading="lazy" style="max-width:70%;">
+          <p class="img-caption">Pizza Hut Truck Menu</p>
+        </div>
+      </div>
+
+  <!-- 
+  ============================================================
+      The Food
+  ============================================================ 
+  -->
+
+  <div class="section">
+    <p class="font-playfair size-xl">The Food</p>
+  </div> 
+
+
+  <!-- 
+  ============================================================
+      The Coffee
+  ============================================================ 
+  -->
+
+  <div class="section">
+    <p class="font-playfair size-xl">The Coffee</p>
+    </div>
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczO6fC0WeMJXFxfnhLNgFuRD6w5__4leB5V8ZOCh9Y2BJ7N204Y6w01BU11YcjpII-H503lHtaDMmmMvJjSwliwfnR2CRpNkYbJq1JarfEs4KXfSXL9EGSUsrktO8lh-2kQpICaM9spLP5wl85s58koV=w1648-h926-s-no-gm?authuser=0" alt="A street scene" class="img-full" width="760" height="400" loading="lazy">
+    <p class="img-caption">Costa Coffee in Shanghai</p>
+    
+    <div class="para-spaced">
+      <div class="clearfix">
+      <div style="float: right; margin-left: 24px; margin-bottom: 8px; width: 180px;">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczMiD_hZ2V7LPDRZkJDXcarf0nU-kA_dNPGhEjzzYl5rowAVATYoUBg7EYWRATd7OA-ry1ex8KBE-wac-mvmDGl1M2N37owH31gtEs7r-GRt-i2EguWLgGePPB4-XyjcojSXmJFQu1t-HRWb4Gx76hLO=w1178-h1570-s-no-gm?authuser=0" alt="Portrait" class="img-right" width="280" height="320" loading="lazy" style="border-radius:6px;">
+        <p class="img-caption">Iced Panda Latte</p>
+        </div>
+        <p>Coffee in China has a bad reputation, but I have no insight here. I never had a normal black coffee. Chinese café menus have all kinds of strange and wonderful coffee drinks so I’ve only ever chosen from the flavored latte sections. These drinks almost never lived up to their names. The Costa Coffee Salty Cheese Latte tasted like a normal latte. The Luckin Coffee Iced Meteor Latte tasted like chocolate milk with boba. The Chongqing Zoo Iced Panda Latte was a standard weak iced latte with panda bear shaped ice cream on top.</p>
+      <p style="margin-top:12px;">Although I don’t feel I had an amazing coffee in China, it’s a lot of fun to see the variety of new and interesting coffee drinks. I’d rather roll the dice with a drink I’ve never heard of than order a standard cappuccino. I’m fairly confident that Chinese supply chains are effective enough for the average Chinese coffee shop to have beans comparable to anywhere else in the world and I’ve done enough espresso research to confidently say that the grinders and espresso machines that they use are more than capable of making good espresso. </p>
+      </div>
+      
+      <div class="two-col">
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczPO_aInvqrxNWSPFlLlET9pzugVt95qQyTwfq1xUFYxGeD7u9Tpdua_CGUazJtzF84ZC0qRnesGO95pVUuGpGuApW229XUHb9_2BnRSJva3Uf0dfPrilXNIxXAsUl5rZlxXlMhSuA92xqo3gb3PLvQw=w1178-h1570-s-no-gm?authuser=0" alt="Food" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">Coffee menu near a university in Shanghai</p>
+        </div>
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczPgmZfHXuvdn7FHEOoxi7DgwF6yNO3Up99EuBAe8ZFdxFbtGps0XhckLbPDM9cTfyK87BgNTWKhlNIWlwvMZXB35YZY93zY3eSXmg9zMD8MJgSm-V3DK99KkAWmXoLwghcAXxK25nlR9HqpO88Cnu4i=w1178-h1570-s-no-gm?authuser=0" alt="Market" class="img-full" width="360" height="240" loading="lazy">
+          <p class="img-caption">N23 Coffee Menu</p>
+        </div>
+      </div>
+      <p>A latte will cost between $2.50-$6.50. The $2.50 plain latte came from a small independent coffee shop next to a university in Shanghai, the $6.50 was a flavored latte and came from Costa Coffee on The Bund in Shanghai. Most lattes from Chinese cafes were somewhere on the lower end of that range. </p>
+      <p>The most popular coffee chain is Luckin Coffee, a Chinese brand, and it’s absolutely everywhere. The other two notable chains are Costa Coffee, a British chain, and Starbucks. Both are much less common than Luckin. Starbucks had a menu identical to what you’d see in New York and with prices to match. Nothing new to make it worth visiting and the sandwiches are just as bland. </p>
+        <div class="spacer-md"></div>
+        <div class="clearfix">
+        <div style="float: right; margin-left: 24px; margin-bottom: 8px; width: 280px;">
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczOi3RZgg5CywPYSIJNieljmAMRJHfTIG_c7uEvIsgaUMUuKhjl1LMWkg4i4_nWjtosbG_sRR_XPHgXSFJ7-Y0NmxS9pyh7szoU_w1JEqoie_n6hiHlAgpJWHKFPk_47-ZqNGwYz0ah748tOyW4LDcm1=w1178-h1570-s-no-gm?authuser=0" alt="Pistachio Coffee" class="img-right" width="280" height="320" loading="lazy" style="border-radius:6px;">
+          <p class="img-caption">Iced Pistachio Egg Roll Latte</p>
+        </div>
+           <p>I had two notable coffee drinks at the Testbed 2 Artpark in Chongqing. The first was the iced pistachio egg roll latte. It was an iced pistachio flavored latte with milk foam and pistachios on top inside an edible ice cream cone-like cup. It was fine. There wasn’t as much coffee inside the cup as I would have like and the cup was really really hard. I think it would have been better hot.</p>
+           <p>Second, and much more importantly was the bell pepper latte from the same area. It was a standard latte, but inside a bell pepper. The pepper added a lot of sweetness and made it one of the best lattes I’ve ever had. It came with a straw that I returned thinking no one has ever wanted or needed to drink a hot latte with a straw. However, because of the shape of the pepper, when trying to get the last drops out, I spilled it all over my shirt. Thinking it was just the wrong part of the pepper to drink from, I rotated it and spilled the rest of it on my shirt. I will not be deducting any points from the bell pepper coffee for my own stupidity so it gets a 5/5 and absolutely everyone should try it. </p>
+
+        </div>
+        <div class="spacer-md"></div>
+    <div class="three-col">
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczMTNlW5qB8_2k7JJXPobeHsToplEPgdliLsZGro3bENcDzUJU_4Vp1fhqZT-NCFQ2LZDjetMesSzXoydQarKYGKa5HRtS2ZwOzA-Ii1e5xf6bHZvCjohzFuGmyX6wW8j_GS05Sh9md52Oi5750_NKPU=w1176-h1570-s-no-gm?authuser=0" alt="Bell Pepper 1" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczPnzof1ndHwpWxrewleY9Pbg-aM3GabNlOOzIGtSrUrdCq4EL3Qm9myvOpIlp4Uwl96FHzt5nI6XeJz7VT7JMjCpKqj_X4BvNtoGkTkPj-hTQBFOdiWpTH8I6B2fwM9kyhTkWsiMr-1e4o5VfUktryp=w1176-h1570-s-no-gm?authuser=0" alt="Bell Pepper 2" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczPZNmwsHgalUdOJhrbzeP0Yc3laMQ-JN0M-LnJ_uXmGECRp3MN28G9Pqs3cOsR9IMyX5Dz83TURVUjLWfiT0I2gAxvau_toerYlbDWdLBiuEt3zQjv2GehXsUuycgw1iaFg7iweNgQPrQ5RcveggNy0=w1176-h1570-s-no-gm?authuser=0" alt="Bell Pepper 3" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+      </div>
+    </div>
+      <p>One final note, the sweet coffee drinks like flavored lattes are usually just fine. However, there is a lot of advertising for and menu space dedicated to fruit coffees. Orange Coffee, Grape Americano, Lemon Sparkling Americano, etc. These are coffee mixed with fruit juice and they are vile. You would hope it’s orange flavored coffee or maybe candied lemon shavings or they invented grape milk and put it in coffee. I keep ordering them because “surely they’re not just pouring an americano into a cup of pomelo juice”, but they are. Don’t fall for it. </p>
+
+<div class="two-col">
+  <div>
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPGRKZC8qYscnDhkRZ5HLS8DPKtmMfU07qLtzEuW48yw7WTIbDq8pLSf8PEZfF8t-jI6mxjRx3ba3YplIl4wL2jUfm_ZKvxsSffX_0QGN_RbJ9Aom_yisCfyoKlGhq-p6uRoecrLP_ern8Sx0xDNgQK=w1178-h1570-s-no-gm?authuser=0" alt="Food" class="img-full" width="360" height="240" loading="lazy">
+    <p class="img-caption">Scicily Americano</p>
+  </div>
+  <div>
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPdm-ccmqqiljdwz3PYR_ml_1zGUAcz4DdIZcFbjmAP_Fqz-k9ybpG5FsvlLGef7qGYMojBWRrbaq_CDHd7TApgARPgnMgGs4ciLAo34SynHL4A8O4XvN1fyX_hbh15zMAVQKvfgRHcJs9LPkhQSySf=w1178-h1570-s-no-gm?authuser=0" alt="Market" class="img-full" width="360" height="240" loading="lazy">
+    <p class="img-caption">KFC Lemon Americano</p>
+  </div>
+</div>
+
+
+  <!-- 
+  ============================================================
+      The Communism
+  ============================================================ 
+  -->
+
+  <div class="section">
+    <p class="font-playfair size-xl">The Communism</p>
+  </div>
+    <p style="margin-top:16px;">China’s economy is Socialism with Chinese Characteristics and it’s ruled politically by the Chinese Communist Party. As a tourist, being in China is indistinguishable from being in a Western Free-Market Capitalist economy. The point of my trip was to understand how being in China feels and the economic system of China feels, as a tourist, the same as any other country. The only other thing that’s socialism/communism related that I have to say is that there is hammer and sickle iconography identifying CCP buildings and landmarks and references to socialism in posters scattered around the cities like easter eggs that are fun to find.  </p>
+    <p>I saw the poster on the right in Shanghai. It says it’s is from the Office of Spiritual Civilization Construction of Shanghai and lists the 12 core socialist values of Prosperity, Democracy, Civility, Harmony, Freedom, Equality, Justice, Rule of Law, Patriotism, Dedication, Integrity, and Friendliness. </p>
+<div class="two-col">
+  <div>
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMrhDNvbxdLE2CD4QkxK766KhrE0vYn_qtNh6jaL49HOWWAJbhiYxlpvaAakNvZeO6Id5ypgh0zuJKDRB8SUWEuHgemRh6QkBSOOOffv9bbWcY2lRYonz7Omjke45OgXWjer3FpgaQqzhXX24Unh_Xc=w1180-h1574-s-no-gm?authuser=0" alt="A Sign for a CCP Administrative Office and Meeting Hall in Shanghai" class="img-full" width="360" height="240" loading="lazy">
+    <p class="img-caption">A Sign for a CCP Administrative Office and Meeting Hall in Shanghai</p>
+  </div>
+  <div>
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczM4ICMZh4uGG4TRWhYVTUpc6aWNhUzqX0xlM66QCyXB6WWFCtpTZ6Vq5YmiHwdrQxwzzvrT4vAmLJhsgqE0RGOeD-n75rwp0cNQPTh-B9AtYS2P2NpcH69VYywnaFKIPgLUwivLuFP8K2rY1sn0A5C_=w1180-h1574-s-no-gm?authuser=0" alt="A Sign Promoting Core Socialist Values in Shanghai" class="img-full" width="360" height="240" loading="lazy">
+    <p class="img-caption">A Sign Promoting Core Socialist Values in Shanghai</p>
+  </div>
+</div>
+
+
+
+  <!-- 
+  ============================================================
+       Chongqing Zoo
+  ============================================================ 
+  -->
+
+  <div class="section">
+    <p class="font-playfair size-xl">The Chongqing Zoo</p>
+  </div>
+
+    <div class="video-wrap">
+       <iframe
+         src="https://youtu.be/zr7xiZj7LIA"
+         title="Chongqing Panda Moving Around"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+         allowfullscreen>
+       </iframe>
+     </div>
+     <p class="img-caption">Chongqing Panda Moving Around</p>
+
+    <div class="clearfix">
+      <div style="float: right; margin-left: 24px; margin-bottom: 8px; width: 280px;">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczM22SCjlBOWTebukyFhlRIx82S8g7ne9jgyiokyrEIb_swmpBhXv2cAb2uXK4IkGMGlQ-2pyjzMP8_KOvVw0lwBLRkmCk0hfZWdVfi2Lf10Mq79-_iVWsq0f6DF8Pbm2Y9SOEH4X8jI4lubAVkNy6Yk=w652-h1160-s-no-gm?authuser=0" alt="Livestreaming the Pandas" class="img-right" width="280" height="320" loading="lazy" style="border-radius:6px;">
+      <p class="img-caption">People Live Streaming The Pandas</p>
+      </div>
+      <p>Chengdu is the sister city to Chongqing and is home to over 70 pandas and a breeding program. Chongqing has around 20 pandas. The pandas seemed happy and, as a huge draw for the city and a point of national pride, I imagine they’re incredibly well taken care of. There were multiple people with camera towers live streaming the pandas that were in the public view. </p>
+      <p style="margin-top:16px;">The rest of the zoo seemed like it would meet, but not exceed AZA standards. They had kangaroos, hippos, lions, tigers, deer, birds, giraffes and anything else you’d find at a top tier zoo. I think the cages and pens could have been larger with more for the animals to do inside of them, but it wasn’t all that different from most of the zoos I’ve been to in America</p>
+    </div>
+
+    <div class="three-col">
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczOVTK1_G_VwdeZDssdSm9glFQPm3GfSKqhPIGDwm5x3JATtGZjSlRQn8LARmbebxnd6v-9TcsZmhLXTO4y3Ga-GJ0pugdEeHjX2Ea5Y_NacS4F1ID9i_kq781bg7iD4xf7RrkDpmqlknHG1a-xxw5ts=w1546-h1160-s-no-gm?authuser=0" alt="Hippos" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczOW_Vx8-0ysR_J45us6nKXq7Dedvw3zJzYu38mDhblY0ak4XyzKluwN9_fismwxCCYTtBc1o0jaWQJisqnVukIVQKfzY4FvFnVasMwbqLp1od_npEKo9-2aWdNjkDiZmwkMX1rW68A3Z8vPDhWK6xhX=w1546-h1160-s-no-gm?authuser=0" alt="Kangaroos" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczPqLmS7hj3E35uKaPeZTaYdGwb1mObIjDmfK54KvvOeh32GyvTlOiERGvRNgB4vDZi2Wvd1WJ18gISzRnXJmNB4O0faNiCMgijP0OaGP5-QaJqJ1sjdH5VC4zKlJHXq91EtZWVSGk0S_C40QxQg08TJ=w1546-h1160-s-no-gm?authuser=0" alt="Deer" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+      </div>
+    </div>
+
+
+
+
+  <!-- 
+  ============================================================
+       Points of Interest
+  ============================================================ 
+  -->
+
+  <div class="section">
+    <p class="font-playfair size-xl">Points of Interest</p>
+  </div>
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Electrical Outlets</h5>  
+    <div class="clearfix">
+      <div style="float: right; margin-left: 24px; margin-bottom: 8px; width: 280px;">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczOckXheEMd-16VhsfmsfZLP-b9pXNDueIWU-llTQZZJp_-YQp6H7sokYP5iIv_ew3UTzxXTud8dn967eDXaH9rnRKzH_gCvTtLItCZIGJbiw0hnRIBd3uWUaE3Ky_eqgCq_TCfBni_0In8rKOYhExEf=w1442-h1160-s-no-gm?authuser=0" alt="Chinese Electrical Outlets" class="img-right" width="280" height="320" loading="lazy" style="border-radius:6px;">
+      <p class="img-caption">Hotel Wall Socket</p>
+      </div>
+      <p>China never adopted a single electric socket type so their sockets accept ungrounded American, Chinese, and European plugs, but their electricity is 220v. America uses 110v so only American electronics can only be plugged directly into an outlet without an adapter if they’re dual voltage. Unfortunately for me British/Hong Kong plugs are not accepted in Chinese outlets so I needed an adapter. Many hotels also had USB-A sockets that you can plug any USB-A into. </p>
+    </div>
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Chinese Welfare Lottery</h5>  
+    <div class="clearfix">
+      <div style="float: right; margin-left: 24px; margin-bottom: 8px; width: 280px;">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczM6j0KecmEb6Q09kCkMUSd2gQpZJOLpUwWaVR9SY5PyoCuLCmkM0vPLrSDUWhTEHa0PGk4N-w9dDvVtj6HjVu4lY2IeHBUkc2cWEBwSs5Yky-X7iY6eUEF3IG_3sWGRGWFMQW7CxeHiLJ0noY3qF5d9=w1546-h1160-s-no-gm?authuser=0" alt="Chinese Welfare Lottery Building" class="img-right" width="280" height="320" loading="lazy" style="border-radius:6px;">
+      <p class="img-caption">Chinese Welfare Lottery Storefront</p>
+      </div>
+      <p>It’s not uncommon to see a China Welfare Lottery wherever you go in a city. As far as I can tell, they sell lottery tickets and scratch-off cards. The money raised from the lottery is used to support social programs. It’s one of two legal lotteries in China (the other being the Sports Lottery which has sports betting and is used to fund sports infrastructure and athletes). </p>
+    </div>
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Vending Machines</h5>  
+    <div class="clearfix">
+      <div style="float: right; margin-left: 24px; margin-bottom: 8px; width: 280px;">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczM-8ooyHNU3vsUjcsCIaTM_r-ZvR8ntGPbp4RiVKM0wrpIX2SU5akP0TONUNK8_0kywAFbQAWdglnz0k8-Ez9igAUqP8OVzv_PFPgXf0_I6Bv7Vg5qDLED4WRrjhQKd4iSzS51ovWdJbDwWFCUqbixl=w1496-h1496-s-no-gm?authuser=0" alt="A Vending Machine in Chongqing" class="img-right" width="280" height="320" loading="lazy" style="border-radius:6px;">
+      <p class="img-caption">A Vending Machine in Chongqing</p>
+      </div>
+      <p>Vending machines in China are wider than in America and contain more drinks, but only slightly more variety. The beverages aren’t as cold as in American machines. There’s always Coke, Sprite, tea, water, and usually White Monster for some reason. </p>
+    </div>
+    
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Alcohol</h5>  
+    <div class="clearfix">    
+    <div style="float: right; margin-left: 24px; margin-bottom: 8px; width: 280px;">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczM8mRrcbfBvs_9CpZoJybW52cFCmgUfofQMNyvMgk-YJV2h882I3JNbIfU2OyHKKLG4lPzK_vPABxvfq8EV9ASMlN3_a_ojwRtTDFxZs53RbFgTalRIWmvM17oRIhWy5NrwdDHGGY9fzD79SaKNnc5E=w870-h1160-s-no-gm?authuser=0" alt="Case of Beers" class="img-right" width="280" height="320" loading="lazy" style="border-radius:6px;">
+      <p class="img-caption">The Beer Available in a Shanghai 7-11</p>
+      </div>
+      <p>Beers in China are mostly what you’d find in the West. 1664, Corona, Asahi, Blue Girl, and Guiness are all very popular. Tsingtao is <em>the</em> Chinese beer and it tastes like a generic light beer. Most of what’s on tap at bars comes from the West. Liquor behind bars was also identical to what you’d see in the West and so were the cocktails on menus. Airplane bottles of liquor (see High Social Trust section for more info) that are available in convenience stores are entirely Western and an American would be familiar with every single bottle. The one difference is the prominence of Soju which is a Korean rice alcohol that’s usually fruit flavored and can be mixed with beer. </p>
+    </div>
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Broken English in Writing</h5> 
+    <p>There are three types that I think are worth mentioning: </p> 
+    <p>A few times per day I’ll run into typos or poor translations. They’re usually errors that would be caught with basic spelling and grammar checking software. Basic English isn’t uncommon here so it’s funny to see errors in places like museums and malls where you’d imagine all writing is reviewed by multiple teams before it gets printed on a sign. Almost every restaurant I went to with a physical menu had English translations on the menu. Maybe 1 in 5 of those would have some kind of typo. Menus that have a misspelling, I’ve found, will also usually spell the word correctly elsewhere on the menu. It makes me think the English is hand typed rather than translated and copy pasted and that the menus are made in a program that doesn’t have English spell checking. It’s never made it difficult to understand anything, just a funny quirk. </p>
+    <p>The second much less common type is intentional broken English. When advertising to people for whom English is not their first language, it can be easier for them to understand if you drop the conjugations and simplify the sentence structures. I very rarely see this as I’m not often in those spaces.</p>
+    <p>The third type is the silly complete gibberish English sentences printed on tee shirts. This does exist, is very rare, and I’m unsure if it’s ironic and intentional or how it happens or why people wear it. </p>
+    <div class="two-col">
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczMJ7xCfwzQwrcBLhZr1hgP-Tu2SpRzA7tiJdBdhwygtkM2pCLNtuJgK3Exox566BXp19DsvERH3lGUJXATQPsKRdYXOT5V0-4yZFp7wRbwR2DtZLiugvliGTw1pFoQTmBpOt-9b6Xx0xJe3hmOUdLlH=w870-h1160-s-no-gm?authuser=0" alt="Sign with Broken English" class="img-full" width="360" height="240" loading="lazy">
+        <p class="img-caption">Sign with Broken English</p>
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczPx-HezZtX_seMmMqdKT8u7fLgGg0gfyCcacNzzN2CY6hxnUuFgHaCv25gTM71r7Y6oyqea5yUn-vY8W7GxViLpqdK_iIxO221buuSsGbh47DBaEJHX1pvaP2NbNsGYm9mzIJtjm-bxVeWxyybkKhZF=w870-h1160-s-no-gm?authuser=0" alt="Broken English Tee Shirt" class="img-full" width="360" height="240" loading="lazy">
+        <p class="img-caption">Shirt with Broken English</p>  
+      </div>
+    </div>
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Toilets</h5>
+    <p>Squatting toilets, aka pootty toilets, are common. The less international the area, the more common they are. I didn’t find any hotels anywhere that had squatting toilets; my rooms all had Japanese style toilets with varying levels of features. Malls in central Shanghai only had standard Western toilets. Malls in Xi’an either had a mix or were entirely squatting toilets. The High Speed Rail, surprisingly, had both. </p> 
+    <div class="two-col">
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczNDwld8nIRmy8kfeUQHe8h8SbyaTfdUptFAS92_HPn7RzV4j4EKUwJDrcFSqw5vAzVQuypL3qWpSTi031HRJeB9V7SeWB14TwA6RmR9FZQvqFKVDARL0RopLEbVsp0MMDcBA-kmob0oOseKnATI4_3t=w1246-h934-s-no-gm?authuser=0" alt="Pootty Toilet Sign" class="img-full" width="360" height="240" loading="lazy">
+        <p class="img-caption">Pootty Toilet Sign</p>
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczNFd1OHIF2zP3Eo4259OQW3hzRS6HI63lntJTSjQ1nxl9W6Y-ZTVnx_2V_n6coKAqkVwN2lZNLchSdqG4U7gg8iPwlemx718utxBdAUorxMs7sfmdD2QDLaz_di2OvylYb1B7okyjLZglR7WKwSvKgc=w1244-h934-s-no-gm?authuser=0" alt="Bathroom Options" class="img-full" width="360" height="240" loading="lazy">
+        <p class="img-caption">A Bar's Gender Neutral Bathroom Options</p>  
+      </div>
+    </div>    
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Rentable Power Banks</h5> 
+    <div class="clearfix">
+    <div style="float: right; margin-left: 24px; margin-bottom: 8px; width: 280px;">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczMCnoCRLhAtbSh0R8YX_kgkHo2opAv9O7wZupdkrk5qmP7HmCNqatAfca1KJNtJXDiRf4u-rjueIXGGq1r_p0WeCrUMaUU0PxlkOvKhvjiARLB-8ai68PDwKTJGC8XBlcvFNO4qZyLmDNU99ibJ8yni=w690-h920-s-no-gm?authuser=0" alt="Rentable Mobile Battery Chargers" class="img-right" width="280" height="320" loading="lazy" style="border-radius:6px;">
+      <p class="img-caption">Rentable Mobile Power Banks</p>
+      </div>      
+      <p>It is very important to have a working phone. Subways will accept credit cards and in restaurants you can order in person and pay with a credit card or cash, but I’ve only ever seen people using Alipay or WeChat. Letting your phone battery die is guaranteed to make your life more difficult so all over the cities are rentable power banks. You pay a one-time refundable $15 deposit and can rent a power bank from any box of power banks and return it to any other box of power banks. They cost less than $1/hr to rent. The app shows you where the nearest ones are and they’re absolutely everywhere. They’re in multiple places in malls, in front of restaurants, on the counter in cafes, and as standalone boxes next to convenience stores. </p>
+    </div>
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Chongqing Ear Cleaning</h5> 
+    <div class="clearfix">
+    <div style="float: right; margin-left: 24px; margin-bottom: 8px; width: 280px;">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczNGP7TmXfWdxobBPUkitmV0aw14xbQNVlUeum1Gy6MgG0-RlMwL0Tmr1MY1aOdRnFKQ0TfGVw38uifK05Q5UGSa4cKaLI0EUBc-dbR1idCT5gwI6DeHVZw47zd042ZYtsrUl7AHuI41HZhBYmLhldeR=w1246-h934-s-no-gm?authuser=0" alt="Ear Cleaning Booth in Chongqing" class="img-right" width="280" height="320" loading="lazy" style="border-radius:6px;">
+      <p class="img-caption">Ear Cleaning Booth in Chongqing</p>
+      </div>      
+      <p>Chongqing is known for their ear cleaning. They’ll have chairs set up where people sit down and they use and endoscope to show the process on screens. You (and everyone else) can watch your ears get cleaned as it happens. When not in use the screens play videos of previous ear cleanings and the cleaners stand outside the shop twanging together giant tweezers to draw your attention. Everything about it makes me uncomfortable. </p>
+    </div>
+       <div class="video-wrap">
+          <iframe
+            src="https://youtube.com/shorts/99z68OLyIIg?feature=share"
+            title="Ear Cleaning in Chongqing"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <p class="img-caption">Ear Cleaning Ad in Chongqing</p>
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Phone Booths</h5> 
+    <div class="clearfix">
+    <div style="float: right; margin-left: 24px; margin-bottom: 8px; width: 280px;">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczN2AQoJTdiij-L5gUioxv5n78sv7DTqohDDbGsEITmyh8k6PxAtz_x8Y0ldM35bf3hK02IkxEv5dLg0c5yrNpY56ZmbazjlQt7rsfwnmffoKX1Vp8e_KH4PBPer8_BRg_Q_wtDN8jJUmvAwC6oclD8Q=w722-h962-s-no-gm?authuser=0" alt="A Phone Booth in Shanghai" class="img-right" width="280" height="320" loading="lazy" style="border-radius:6px;">
+      <p class="img-caption">A Phone Booth in Shanghai</p>
+      </div>      
+      <p>Phone booths, surprisingly, aren’t uncommon around the three cities I visited. They were all built differently, some fully enclosed, some just on a pole, and I never saw anyone using them. </p>
+    </div>
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Restaurant Etiquette</h5> 
+    <p>I was surprised to find that in many restaurants, you just leave when you’re done and there’s no need to clean up after yourself. In every restaurant a hostess brought me to my table and pointed out the QR code for the menu. About half of the restaurants had physical menus as well. After you order the waitstaff brings you a receipt along with your food they will check in on you during your meal. Half of the time, at the end of the meal you bring the receipt to the hostess stand and pay there, but the other half where you’ve ordered through the phone, you pay your bill in the app and walk out. This always felt like dining and dashing and I always looked to make eye contact with a server before leaving to ensure I wasn’t forgetting to do something. But because I order through Alipay and WeChat, the restaurant has my real name and ID associated with my order so it would be impossible to get away with not paying. But it still felt weird to just disappear. </p>
+    <p style="margin-bottom:16px;">It also felt weird to leave a mess at the table. In fast food restaurants and food halls, an employee comes around to pick up your trash and clean the tables so people will just leave big piles of garbage. Garbage cans in McDonalds for instance are available and you can bring your tray, but someone working there will take it for you once you reach the bins. At very casual street-side restaurants people will throw trash like chicken bones, napkins, peanut shells, etc. directly on the ground while eating and when they’re done an employee will sweep it up. It felt weird to leave a messy table in places without a waitstaff, but it’s what people do and I could get used to it. What never felt comfortable was the way people left their garbage. I had grilled oysters in a food hall in Chongqing where I’d take the oyster out of the cardboard bin to eat it and the shell went back in the cardboard bin when I was done. When I finished, the whole meal, napkins and wooden utensils included, could be picked up with one hand and thrown out. The table in front of me also had oysters and left it so that each shell would need to be individually thrown out and the table would need to be cleaned. I can understand having janitorial staff throw trash and clean tables, but leaving your trash in a way that makes more work for those people just doesn’t sit right with me. </p>
+        <div>
+          <img src="https://lh3.googleusercontent.com/pw/AP1GczMYtALNe3tUPXK-V6ltvxjhH2MGiVyhBjDKe8lLX3OQOcHDYqQ_cNL-hyAXgKsQLbEM0sUsC7MVkfsOv_TjwCY61Zz8QzGE_OEQNLkFzbDjYSbwmExfXGPQjuMcWEQ_quYCAVfojpG07oeuGXvx9dCU=w1938-h1454-s-no-gm?authuser=0" alt="Table Left After Diners" class="img-full" width="360" height="40" loading="lazy">
+          <p class="img-caption">A Table After a Meal in a Food Hall in Chongqing</p>
+        </div>
+   
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">AI</h5> 
+      <p>I ran into AI frequently in China. I would occasionally see AI generated images in advertisements and on menus. AI is used to sell new technologies and is a selling point for Huawei and other Chinese tech companies in the same way that it is for Apple in the US. In Shenzhen there were ads everywhere in public talking about how the city and the businesses within it are working towards the future of AI. AI is integrated into parts of Alipay and WeChat and I used it in the Travel+ section of Alipay to help find things to do in each city. While scrolling Xiaohongshu on the Chinese internet, I found a <em>lot</em> of AI slop videos. Videos with AI voiceovers, AI characters telling stories, clips strung together that were obviously made with AI, and that sort of thing. While on the subway I noticed a lot of people were on their phones watching AI slop content and the Chinese AI slop I’ve seen felt especially low quality. I use Claude and GPT a lot for research and coding. (I’ve used it for some of the HTML in this website, but all of the ideas and writing are my own). I’ve also tried out the Chinese DeepSeek, Kimi, and Wenxin AIs and none have felt as capable as Western AI. Overall, AI in China feels more generally prevalent and of a slightly lower quality.  </p>
+      <div class="two-col">
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczOCzegJ7h0PiEuZXzgHR_V1KuGgyvyT0tpPMN2kDoPZSvjr93CRYVJFE6CKcK-mDmFdtgLElV9LRuYh3WBk8zDICcklA2bFwkY_bfR4LCFivQSHGCECSIwvNDJep3sX2VQ3dELZss1YZCQYdFfBhRHY=w1490-h1118-s-no-gm?authuser=0" alt="Chongqing Zoo AI Ad" class="img-full" width="360" height="240" loading="lazy">
+        <p class="img-caption">AI Pandas in the Chongqing Zoo</p>
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczO6kwf8Tq82tWyPdGI5JNdORCEmFxXjybWr9U6ANa2S2Y_3g330SLNsuFF7xozNcNFbNdh-89x9uJ9wUSoYxfvzEEo_DstsI9p_nPTtsxv-c0-onrskLekd7v0ioZOZKc78MPYrFmEuriqQifqdckYs=w1490-h1118-s-no-gm?authuser=0" alt="AI Ad" class="img-full" width="360" height="240" loading="lazy">
+        <p class="img-caption">AI Ad outside the Chongqing High Speed Rail Station</p>  
+      </div>
+    </div>     
+     
+        
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Russian Goods</h5> 
+    <div class="clearfix">
+    <div style="float: right; margin-left: 24px; margin-bottom: 8px; width: 280px;">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPjRgV1c60Cd9T5UA3kO1IL2AHMiCVGqbY5pasUhBkDrM5t4BISIuOeoOwHgxMpPP7aGyaN9UPaQFqnIIo0Jem4qI2HGGkgIhEbr5jIepQTkvkxjECUg_LRtPzrogn6DPl0gNFTRZVGCHU0bKeF2uK7=w575-h769-s-no-gm?authuser=0" alt="Chinese Russian-Style Chocolate"" class="img-right" width="280" height="320" loading="lazy" style="border-radius:6px;">
+    <p class="img-caption">Chinese Russian-Style Chocolate with AI Wrappers</p> 
+    </div>
+    <p>I’ve heard Russian stores have recently become popular in China, but I only ever saw one near the tourist area of Yuyuan Street in Shanghai. It was interesting, but all of the goods felt like they were geared towards a Russian aesthetic rather than being anything authentically Russian and worth buying. A lot of the products seemed to be made in China and designed to look Russian. The LIAMAIR chocolate bars have AI packaging and are definitely Chinese. The Stalin wine is authentic and from the country of Georgia. </p>
+    </div>
+       <div>
+         <img src="https://lh3.googleusercontent.com/pw/AP1GczNrGhYIRR9WKwFQOqzuxhc4MgY9pa0GOitLnJvfXVyAfnRkAykrT9nZF7sTk2aek2RVCMYm4u5a4fP5fuoEIZtGqhNP17Rdb-JpdE_nkMl4LeyvyyC70g_Ay54tWpEq4jUPOS64osFiTE_8-w89pmbr=w1384-h1038-s-no-gm?authuser=0" alt="Stalin Wine" class="img-full" width="360" height="40" loading="lazy">
+         <p class="img-caption">Stalin Wine</p>
+       </div>
+       
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Birds, Pets, and Strays</h5> 
+
+    <p>Just as everywhere else, the majority of birds are pigeons. Chongqing had the biggest pigeons I’ve ever seen and when I saw children feeding and chasing them at an open-air food market outside a mall, I thought they were playing with chickens. Personality wise, they’d fit right in with their American counterparts. The pictures of the Shanghai bird and the Xi’an bird below are the only other birds I noticed on the trip. The Shanghai bird was next to a pond in the Shanghai equivalent of Central Park and the Xi’an bird was living in the park around The Giant Wild Goose Pagoda.</p>
+    <div class="three-col">
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczOtG0cwzu9HwyOuBhPKQXPjxIsgYKhi0ZCecDP1LsX8J8VMo71bWwcLqSLStl9JfRNyfi1k7tLwnjLgL99t536q6UXQW1pTs30FSoO_aHOVsvY2Vlbn1JSYf9E6v7ZdzA-mXx2GVX-DebH4659jGOtW=w1504-h1128-s-no-gm?authuser=0" alt="Shanghai Bird" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Shanghai Bird</p>
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczO_e2SmLQXX6MXd_jjuVotoVwBTuM7-XigrtcQpQgO35c_uRMdn0dD4oDyT2sWZ6YwPI6YDTj5dJVbUvAOUpxhQHaZWpFzAr9zTbrPirzIaFIrmYNJahEux6ZLTXKlMa0_iMd2CcWLGGXW81_LZ0a1T=w846-h1128-s-no-gm?authuser=0" alt="Beautiful Xi'an Bird" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Beautiful Xi'an Bird</p>
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczM5QZ-Xsf9-g3Uixj6IsLtMXApJ7XJ1DTGRVsIl3dei_5j36gIlZ3M9K7R-Jv4miKxgvI1vD_2pnJO8Aim4oBHGGBycrHWdVV3cT4VOfP5AAsCOH_0dWEyRDCWCkM8Ec9lfClo6F1JHjBzzKC9Eucep=w846-h1128-s-no-gm?authuser=0" alt="Chongqing Pidgeons" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Chongqing Pigeons</p>
+      </div>
+    </div>
+
+    <p>Corgis are the most popular dogs and the largest of the pet dogs I saw. Many of the dogs looked like the Chongqing Creature in the video below. In Hong Kong people will carry a squeeze bottle with water when walking their dogs to wash off anything they pee on. I didn’t see that while I was on the mainland. Many stores will have store cats who take their jobs of sleeping all around the store very seriously.</p>
+    <div class="three-col">
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczM8SScE-T6pGlQH76KKMi3Dk33SM8p87DzJblEAX3L16lpdTnWhNbt0ZiypDM4jR9u25r-cj31qW5TSAWbbsoFkNrwejbyqHPysrUHGSZXO_RzwJbxb3MBpATYSlgiP5ja1KgYmdbXPbuT0cPl-rcng=w846-h1128-s-no-gm?authuser=0" alt="Shanghai Bar Owner" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Shanghai Bar Owner</p>
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczM7fxMMK7fff3AW1JrRBCWPwKO4UhlE-QV9IC3Y-TkyqmrFStRyhF0cKJmVAEhcfAFMIfqSPeetJAE4Sc7UZVEE2iuo_d4CzaO8V7OXUfyEb8R5mIca-I2Ui3DWBoC1pNaCnAFH91njmcsZxPYzWzAH=w846-h1128-s-no-gm?authuser=0" alt="Shanghai Pet Cat" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Shanghai Pet Cat</p>
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczOINWqDMxlp-jJXIcWNg6RIPX-pwbIGMxc9zX65kMoXMZIBwNDyOpAFvFb-yDTnt82Mwg5zU6nZE24NEZ_2Koo7gQiLdCoAVPWmboDkfjM4Y9njw0t7B8YN1zRfppw-JHaitiLMvMiRM6BRkNnAJepl=w846-h1128-s-no-gm?authuser=0" alt="Chongqing Dog" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Chongqing Pet Dog</p>
+      </div>
+    </div>
+        
+    <p>As an American, seeing stray animals is surprising. I don’t know that I ever saw one until I went to the Philippines. The stray cats in China seemed well fed and happy and didn’t mind the crowds of photographers they attracted.</p>
+    <div class="three-col">
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczPndE0Jxn4ZY4K-fp-0NQIol8y6uAArH7Khxs59MZaZdtJ2rfWC9oD1OP2PViRuCFlEahGihCcGPNlUj_piYnoDJMU4FylDgct2-n4KflpD30TX1UkRd85vG8pYGrEtAR_RUtZ-fjUizd6JiS7ZKFya=w846-h1128-s-no-gm?authuser=0" alt="Xi'an Stray Cat" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Stray Cat in Xi'an</p>
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczPX6TW75cADfpLoSp6CrOwXC3HvFADWAsuc1I6jfAC2DPnOLjghOBQIeQOzzGCXbj4ZwQ88KOYoPufFhbevg2k2TsTw_7Q-M2hVpiQzRQzqKr8qfelnVLs0jdCfADRXr-ZfK2ti3NxXT9rJpShyNN6-=w1504-h1128-s-no-gm?authuser=0" alt="Chongqing Stray 1" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Stray Cat in Chongqing #1</p>
+      </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczPE0CK-83wqIilN_NYvxsl69oY88M1zAjfPvvNxVL9OgoxWMyAwZrrHLi2TAf7FGoQwNJiSwcTsl2tZydBLyCjNzUYf_4ZhSuCY6hl88oWFzi_0hLkjOS5jdlWb9EMGbCDIlY9bToCqAUdhVWVbfthL=w846-h1128-s-no-gm?authuser=0" alt="Chongqing Stray 2" class="img-full" width="240" height="240" loading="lazy" style="object-fit:cover; aspect-ratio:1">
+        <p class="img-caption">Stray Cat in Chongqing #2</p>
+      </div>
+    </div>
+
+     <div class="video-wrap">
+        <iframe
+          src="https://youtu.be/krm6LgeHnsg"
+          title="The Chongqing Creature"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <p class="img-caption">The Chongqing Creature</p>
+    </div>
+       
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">Shanghai Property Listings</h5>
+    <div class="para-spaced">
+    <p>I saw these apartment listings in the window of a real estate agency in Shanghai. They seem to be on the higher end of average for what apartments in Shanghai cost to rent or buy. The circle at the top right has 售 for rent and 租 for sale. </p>
+    <p>The bottom right listing is for rent for RMB 11,000 ($1,624) per month, has 1/2/1 or 1 bedroom / 2 living/dining rooms / 1 bathroom, and is 63 square meters or 678 square feet. The top row, third from the left shows an apartment for sale for 1400 (the symbol next to it means “x10k”) so RMB 14 million ($2.07 million), has 3/2/2 or 3 bedrooms / 2 living/dining rooms / 2 bathrooms, and is 137 square meters or 1474 square feet. </p>
+    <p style="margin-bottom:16px;">Some info, I’ve researched while being here: 90% of people in China own their home which is significantly more than in the US. You pay a one-time fee to the government for a 70-year lease of the land your home or apartment is on, but you own the building or apartment you live in outright. As a Chinese person there are limits on how many apartments you can buy in the city you live in and foreigners can only purchase a single apartment after they’ve been living in a Chinese city for at least 1 year. There are no property taxes unless you’re a landlord renting an apartment you own to someone else. </p>
+    </div>
+      <div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczNNuxKBs7l3PtYSXJcmxLGXhzZabfcsgLcopf_eJ7hyddafU_hq_ivwElggbRJ7RY1wUjE-yhsWUw9QzQXE5BRtSzkcHaFlUPefOEQH95HGcoRphRMQmmIQxNTeXu2r-FHpc4N6d8bGMQWvvJ7BgEx1=w1846-h1038-s-no-gm?authuser=0" alt="Property Listings in Shanghai" class="img-full" width="360" height="40" loading="lazy">
+        <p class="img-caption">Property Listings in Shanghai</p>
+      </div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- 
+  ============================================================
+       Next Section
+  ============================================================ 
+  -->
+
+
+
+
+
+
+      
+
+
+      </div>
+  </div>
+  
+  <div class="section">
+    <p class="label">Section 2 — Font Sizes</p>
+
+    <p class="font-playfair size-hero">Hero Text (64px)</p>
+    <p class="font-playfair size-2xl">Page Title (40px)</p>
+    <p class="font-playfair size-xl">Section Title (28px)</p>
+    <p class="font-inter size-lg">Subheading (20px)</p>
+    <p class="font-inter size-base">Body text — standard reading size (16px). This is what most of your writing should be. Comfortable, readable, professional.</p>
+    <p class="font-inter size-sm muted" style="margin-top:8px;">Small text — navigation, buttons, metadata (14px)</p>
+    <p class="font-inter size-xs muted" style="margin-top:4px;">Tiny label — captions, timestamps, footnotes (12px) — absolute minimum size</p>
+  </div>
+
+
 
 <img src="https://lh3.googleusercontent.com/pw/AP1GczODLXxQStDuLNbYh27N6c2DQXWvPTtCYXxdHHhjR1keSG2gN-P8zz_aI6H4Gah-eCS98-u-uml2RHQiCE_djDPr6_QrmehcjyUSIeySDUIeB9DNR7qXdfFNVyVqIM7I4tsnxHBd73WkKcxbKWNUXQ6l=w1090-h1454-s-no-gm?authuser=0" alt="A street scene" width="50%" height="auto" loading="lazy">
+<img src="https://lh3.googleusercontent.com/pw/AP1GczPlzcvPYL0kB53p31m3ogmqOeBmPtmpuU2bJ8pDjUfqh6_jHDRaI47Km7iZ62uwvmZ0Jo5zwMC6BFNWE0Eh4NYdPIPcbcoTC7GaHiIl_4YPDtPGWNjVEUYXe_7EI59hsjUaHe75UW1Q9TC6deWOZqFT=w1090-h1454-s-no-gm?authuser=0" alt="A street scene" width="400" height="auto" loading="lazy">
+
 
 <!-- 
 <img src="" alt="A street scene" class="img-full" width="760" height="400" loading="lazy">
@@ -26,7 +1520,7 @@
 
  <div class="video-wrap">
     <iframe
-      src="https://www.youtube-nocookie.com/embed/krm6LgeHnsg"
+      src="https://www.youtube.com/embed/krm6LgeHnsg"
       title="Travel video"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen>
@@ -35,21 +1529,3 @@
   <p class="img-caption">Video caption — location, date, or short description.</p>
   <p class="muted size-sm" style="margin-top:12px;">To embed your own video: go to YouTube → Share → Embed → copy the URL from src="..." and paste it above.</p>
 </div>
-
- <div class="video-wrap">
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/krm6LgeHnsg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-</div>
-
-
-
-<p class="p1"><span class="s1">/b text2 \b</span></p>
-  <!-- ============================================================
-       SECTION 2: FONT SIZES
-  ============================================================ -->
-<p class="p1"><span class="s1">_text3_</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p3"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>This is my trip</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;span&gt;</span></p>
-</body>
-</html>
