@@ -325,6 +325,7 @@
       h1 { font-size: 32px; }
     }
     
+    /* Original phone frame */
     .phone-frame {
       position: relative;
       width: 300px;
@@ -335,13 +336,36 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
       aspect-ratio: 9/16;
     }
-    
+
     .phone-frame iframe {
       width: 100%;
       height: 100%;
       border: none;
       display: block;
-}
+    }
+    
+    /* Suggested phone frame */
+    .phone-frame-v2 {
+      position: relative;
+      width: 280px;
+      margin: 24px auto;
+      border-radius: 40px;
+      overflow: hidden;
+      border: 10px solid #1a1a1a;
+      box-shadow: 
+        0 20px 60px rgba(0,0,0,0.3),
+        inset 0 0 0 1px rgba(255,255,255,0.05);
+      aspect-ratio: 9/16;
+      background: #000;
+    }
+    
+    .phone-frame-v2 iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
   </style>
 </head>
 
@@ -807,6 +831,14 @@
 
 
 
+
+
+
+
+
+
+
+
     <h5 style="margin-top: 24px; margin-bottom: 12px;">Original</h5>    
     <div class="video-wrap">
        <iframe
@@ -842,7 +874,7 @@
 
 
 
-    <h5 style="margin-top: 24px; margin-bottom: 12px;">AI Recommendation</h5>    
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">AI Recommendation 1</h5>    
 <div class="phone-frame">
   <iframe
     src="https://www.youtube.com/embed/lomgcYPxD78?controls=0&modestbranding=1&rel=0"
@@ -851,7 +883,29 @@
   </iframe>
 </div>
 
+
+    <h5 style="margin-top: 24px; margin-bottom: 12px;">AI Recommendation 2</h5>    
+<div class="phone-frame-v2">
+  <iframe
+    src="https://www.youtube.com/embed/lomgcYPxD78?controls=0&modestbranding=1&rel=0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+
+
+
     <h5 style="margin-top: 24px; margin-bottom: 12px;">End Testing</h5>    
+
+
+
+
+
+
+
+
+
+
 
 
 
